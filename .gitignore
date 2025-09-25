@@ -1,0 +1,28 @@
+# Файлы Visual Studio
+**/.vs/
+**/Debug/
+**/Release/
+**/x64/
+**/x86/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.suo
+*.sdf
+
+# Временные файлы
+*.obj
+*.pdb
+*.ilk
+*.log
+*.tlog
+*.cache
+
+# Исполняемые файлы
+*.exe
+*.dll
+
+# Системные файлы
+.DS_Store
+Thumbs.db
