@@ -13,4 +13,6 @@ void testPrint(const String& myString);
 
 void printMenu();
 
+void testAssignment();
+
 #endif

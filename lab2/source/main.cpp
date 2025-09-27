@@ -29,6 +29,9 @@ int main() {
       case '4':
         testDecoding(myString);
         break;
+      case '5':
+        testAssignment();
+        break;
       case '0':
         running = false;
         cout << "Exit" << endl;
