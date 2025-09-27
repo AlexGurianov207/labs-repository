@@ -9,4 +9,8 @@ void testCoding(String& myString);
 
 void testDecoding(String& myString);
 
+void testPrint(const String& myString);
+
+void printMenu();
+
 #endif

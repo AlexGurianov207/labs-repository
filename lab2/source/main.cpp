@@ -11,12 +11,7 @@ int main() {
   String myString;
 
   while (running) {
-    cout << "---------MENU---------" << endl;
-    cout << "1.Input string" << endl;
-    cout << "2.Print string" << endl;
-    cout << "3.Coding string" << endl;
-    cout << "4.Decoding string" << endl;
-    cout << "0. Exit" << endl;
+    printMenu();
 
     cin >> choice;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -26,7 +21,7 @@ int main() {
         testInput(myString);
         break;
       case '2':
-        cout << myString << endl;
+        testPrint(myString);
         break;
       case '3':
         testCoding(myString);
