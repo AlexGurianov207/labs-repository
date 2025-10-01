@@ -6,16 +6,12 @@ Learner::Learner(const std::string& newName, int newAge)
 Learner::Learner() : name("Undefined"), age(18) {}
 
 void Learner::display() const {
-    std::cout << "Name:" << name << " ";
-    std::cout << "Age:" << age << " ";
+  std::cout << "Name:" << name << " ";
+  std::cout << "Age:" << age << " ";
 }
 
-std::string Learner::getType() const {
-    return "Learner";
-}
+std::string Learner::getType() const { return "Learner"; }
 
-std::string Learner::getName()const {
-    return name;
-}
+std::string Learner::getName() const { return name; }
 
-int Learner::getAge()const { return age; }
+int Learner::getAge() const { return age; }

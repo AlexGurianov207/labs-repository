@@ -1,10 +1,9 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include"learner.h"
-#include"student.h"
-#include"schoolboy.h"
-#include<span>
+#include "learner.h"
+#include "schoolboy.h"
+#include "student.h"
 
 void showMenu();
 
