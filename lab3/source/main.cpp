@@ -41,9 +41,7 @@ int main() {
 
 	} while (choice != '0');
 
-	if (learners != nullptr) {
-		learners = deleteData(learners, count);
-	}
+	learners = deleteData(learners, count);
 
 	return 0;
 }
