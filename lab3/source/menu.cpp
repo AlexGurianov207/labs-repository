@@ -82,7 +82,7 @@ void viewLearners(Learner** learners,int count) {
 }
 
 Learner** addLearner(Learner** learners, int& count,Learner* newLearner) {
-    Learner** newArray = new Learner * [count + 1];
+    auto** newArray = new Learner * [count + 1];
 
     for (int i = 0; i < count; i++) {
         newArray[i] = learners[i];
