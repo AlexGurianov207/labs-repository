@@ -27,8 +27,8 @@ void deleteData(Learner**& learners, int& count) {
     count = 0;
 }
 
-void viewSeparately(Learner** learners, int count) {
-    if (count == 0) {
+void viewSeparately(span<Learner*> learners) {
+    if (learners.empty()) {
         cout << "No learners" << endl;
         return;
     }
@@ -37,7 +37,7 @@ void viewSeparately(Learner** learners, int count) {
 
     bool hasStudent = false;
 
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < learners.size(); i++) {
         if (learners[i]->getType() == "Student") {
             learners[i]->display();
             cout << endl;
@@ -53,7 +53,7 @@ void viewSeparately(Learner** learners, int count) {
 
     bool hasSchoolboy = false;
 
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < learners.size(); i++) {
         if (learners[i]->getType() == "Schoolboy") {
             learners[i]->display();
             cout << endl;
@@ -67,14 +67,14 @@ void viewSeparately(Learner** learners, int count) {
 
 }
 
-void viewLearners(Learner** learners,int count) {
-    if (count == 0) {
+void viewLearners(span<Learner*> learners) {
+    if (learners.empty()) {
         cout << "No learners" << endl;
         return;
     }
 
-    cout << "Learners(" << count << "):" << endl;
-    for (int i = 0; i < count; i++) {
+    cout << "Learners(" << learners.size() << "):" << endl;
+    for (int i = 0; i < learners.size(); i++) {
         cout << i + 1 << ". ";
         learners[i]->display();
     }

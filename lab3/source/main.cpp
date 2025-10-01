@@ -23,10 +23,10 @@ int main() {
 			addNewLearner(learners, count);
 			break;
 		case '3':
-			viewLearners(learners, count);
+			viewLearners(std::span<Learner*>(learners,count));
 			break;
 		case '4':
-			viewSeparately(learners, count);
+			viewSeparately(std::span<Learner*>(learners, count));
 			break;
 		case '5':
 			deleteData(learners, count);

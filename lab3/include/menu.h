@@ -4,14 +4,15 @@
 #include"learner.h"
 #include"student.h"
 #include"schoolboy.h"
+#include<span>
 
 void showMenu();
 
 void deleteData(Learner**& learners, int& count);
 
-void viewSeparately(Learner** learners, int count);
+void viewSeparately(std::span<Learner*> learners);
 
-void viewLearners(Learner** learners, int count);
+void viewLearners(std::span<Learner*> learners);
 
 void createTestData(Learner**& learners, int& count);
 
