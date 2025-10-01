@@ -29,7 +29,7 @@ int main() {
 			viewSeparately(learners, count);
 			break;
 		case '5':
-			learners = deleteData(learners, count);
+			deleteData(learners, count);
 			break;
 		case '0':
 			std::cout << "Exit" << std::endl;
@@ -41,7 +41,7 @@ int main() {
 
 	} while (choice != '0');
 
-	learners = deleteData(learners, count);
+	deleteData(learners, count);
 
 	return 0;
 }

@@ -13,19 +13,18 @@ void showMenu() {
     cout << "Your choice: ";
 }
 
-Learner** deleteData(Learner** learners, int& count) {
+void deleteData(Learner**& learners, int& count) {
     if (learners == nullptr) {
-        return nullptr;
+        return;
     }
 
     for (int i = 0; i < count; i++) {
         delete learners[i];
     }
 
-    delete learners;
+    delete[] learners;
+    learners = nullptr;
     count = 0;
-
-    return nullptr;
 }
 
 void viewSeparately(Learner** learners, int count) {
@@ -97,9 +96,8 @@ Learner** addLearner(Learner** learners, int& count,Learner* newLearner) {
 }
 
 void createTestData(Learner**& learners, int& count) {
-    if (learners != nullptr) {
-        learners = deleteData(learners, count);
-    }
+    deleteData(learners, count);
+
 
     learners = addLearner(learners, count, new Student("Jack", 19, "BSUIR", "Physics", 2));
     learners = addLearner(learners, count, new Schoolboy("Sara", 16, "Pavlovichi school", 10));

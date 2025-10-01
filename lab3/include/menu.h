@@ -7,7 +7,7 @@
 
 void showMenu();
 
-Learner** deleteData(Learner** learners, int& count);
+void deleteData(Learner**& learners, int& count);
 
 void viewSeparately(Learner** learners, int count);
 
