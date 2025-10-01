@@ -5,13 +5,15 @@
 #include<string>
 
 class Learner {
-protected:
+private:
 	std::string name;
 	int age;
 public:
 	Learner(const std::string& name, int age);
 	Learner();
 
+	std::string getName()const;
+	int getAge()const;
 	virtual void display() const;
 	virtual std::string getType() const;
 

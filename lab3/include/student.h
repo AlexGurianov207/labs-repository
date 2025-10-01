@@ -12,6 +12,9 @@ public:
 	Student();
 	Student(const std::string& newName, int age, const std::string& newUniversity, const std::string& newFaculty, int course);
 
+	std::string getUniversity()const;
+	std::string getFaculty()const;
+	int getCourse()const;
 	void display() const override;
 	std::string getType() const override;
 };

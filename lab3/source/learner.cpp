@@ -13,3 +13,9 @@ void Learner::display() const {
 std::string Learner::getType() const {
     return "Learner";
 }
+
+std::string Learner::getName()const {
+    return name;
+}
+
+int Learner::getAge()const { return age; }

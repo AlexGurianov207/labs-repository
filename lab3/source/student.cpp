@@ -6,7 +6,9 @@ Student::Student(const std::string& newName, int newAge, const std::string& newU
 	Learner(newName,newAge),university(newUniversity),faculty(newFaculty),course(newCourse){}
 
 void Student::display() const {
-	Learner::display();
+	std::cout << "Name:" << getName() << " ";
+	std::cout << "Age:" << getAge() << " ";
+
 	std::cout << "University:" << university << " ";
 	std::cout << "Course:" << course << " ";
 	std::cout << "Faculty:" << faculty << " ";
@@ -15,4 +17,16 @@ void Student::display() const {
 
 std::string Student::getType() const {
 	return "Student";
+}
+
+std::string Student::getUniversity()const {
+	return university;
+}
+
+std::string Student::getFaculty()const {
+	return faculty;
+}
+
+int Student::getCourse()const {
+	return course;
 }
