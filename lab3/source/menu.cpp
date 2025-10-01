@@ -36,7 +36,7 @@ void viewSeparately(span<Learner*> learners) {
     cout << "Students:" << endl;
 
     bool hasStudent = false;
-    for (auto* learner:learners) {
+    for (const auto* learner:learners) {
         if (learner->getType() == "Student") {
             learner->display();
             cout << endl;
@@ -52,7 +52,7 @@ void viewSeparately(span<Learner*> learners) {
 
     bool hasSchoolboy = false;
 
-    for (auto* learner:learners) {
+    for (const auto* learner:learners) {
         if (learner->getType() == "Schoolboy") {
             learner->display();
             cout << endl;
@@ -74,7 +74,7 @@ void viewLearners(span<Learner*> learners) {
 
     cout << "Learners(" << learners.size() << "):" << endl;
     int counter = 1;
-    for (auto* learner : learners) {
+    for (const auto* learner : learners) {
         cout << counter << ". ";
         learner->display();
         counter++;
