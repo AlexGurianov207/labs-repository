@@ -136,8 +136,8 @@ void addNewLearner(Learner**& learners, int& count) {
   }
   cin.ignore();
 
-  if (type != static_cast<int>(LearnerType::Student) &&
-      type != static_cast<int>(LearnerType::Schoolboy)) {
+  if (type != learnerTypeStudent &&
+      type != learnerTypeSchoolboy) {
     cout << "Invalid input" << endl;
     return;
   }
@@ -162,7 +162,7 @@ void addNewLearner(Learner**& learners, int& count) {
 
   Learner* newLearner = nullptr;
 
-  if (type == static_cast<int>(LearnerType::Student)) {
+  if (type == learnerTypeStudent) {
     cout << "Enter the university:";
     getline(cin, university);
 
