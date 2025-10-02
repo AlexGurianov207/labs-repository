@@ -8,8 +8,6 @@
 constexpr int learnerTypeStudent = 1;
 constexpr int learnerTypeSchoolboy = 2;
 
-enum class LearnerType { Student = 1, Schoolboy };
-
 void showMenu();
 
 void deleteData(Learner**& learners, int& count);

@@ -136,8 +136,7 @@ void addNewLearner(Learner**& learners, int& count) {
   }
   cin.ignore();
 
-  if (type != learnerTypeStudent &&
-      type != learnerTypeSchoolboy) {
+  if (type != learnerTypeStudent && type != learnerTypeSchoolboy) {
     cout << "Invalid input" << endl;
     return;
   }
