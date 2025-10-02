@@ -5,6 +5,8 @@
 #include "schoolboy.h"
 #include "student.h"
 
+enum class LearnerType { Student = 1, Schoolboy };
+
 void showMenu();
 
 void deleteData(Learner**& learners, int& count);

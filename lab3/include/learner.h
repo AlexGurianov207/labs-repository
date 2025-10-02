@@ -7,6 +7,10 @@
 
 class Learner {
  private:
+  static constexpr int minAge = 5;
+  static constexpr int maxAge = 80;
+  static constexpr int defaultAge = 0;
+
   std::string name;
   int age;
 
@@ -18,6 +22,10 @@ class Learner {
   int getAge() const;
   virtual void display() const;
   virtual std::string getType() const;
+
+  static bool isValidAge(int age);
+  static int getMinAge() { return minAge; }
+  static int getMaxAge() { return maxAge; }
 
   virtual ~Learner() = default;
 };

@@ -128,26 +128,67 @@ void addNewLearner(Learner**& learners, int& count) {
   cout << "2. Schoolboy" << endl;
   cout << "Your choice:";
   cin >> type;
+  if (cin.fail()) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Invalid input" << endl;
+    return;
+  }
   cin.ignore();
+
+  if (type != static_cast<int>(LearnerType::Student) &&
+      type != static_cast<int>(LearnerType::Schoolboy)) {
+    cout << "Invalid input" << endl;
+    return;
+  }
 
   cout << "Enter the name:";
   getline(cin, name);
+  if (name.empty()) {
+    cout << "Name can't be empty" << endl;
+    return;
+  }
 
   cout << "Enter the age:";
   cin >> age;
+  if (cin.fail() || !Learner::isValidAge(age)) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Invalid age! Must be between " << Learner::getMinAge() << " and "
+         << Learner::getMaxAge() << endl;
+    return;
+  }
   cin.ignore();
 
   Learner* newLearner = nullptr;
 
-  if (type == 1) {
+  if (type == static_cast<int>(LearnerType::Student)) {
     cout << "Enter the university:";
     getline(cin, university);
+
+    if (university.empty()) {
+      cout << "University cannot be empty!" << endl;
+      return;
+    }
 
     cout << "Enter the faculty:";
     getline(cin, faculty);
 
+    if (faculty.empty()) {
+      cout << "Faculty cannot be empty!" << endl;
+      return;
+    }
+
     cout << "Enter the course:";
     cin >> course;
+    if (cin.fail() || !Student::isValidCourse(course)) {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Invalid course! Must be between " << Student::getMinCourse()
+           << " and " << Student::getMaxCourse() << endl;
+      return;
+    }
+
     cin.ignore();
 
     newLearner = new Student(name, age, university, faculty, course);
@@ -155,8 +196,20 @@ void addNewLearner(Learner**& learners, int& count) {
     cout << "Enter the school name:";
     getline(cin, schoolName);
 
+    if (schoolName.empty()) {
+      cout << "School name cannot be empty!" << endl;
+      return;
+    }
+
     cout << "Enter the grade:";
     cin >> grade;
+    if (cin.fail() || !Schoolboy::isValidGrade(grade)) {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Invalid grade! Must be between " << Schoolboy::getMinGrade()
+           << " and " << Schoolboy::getMaxGrade() << endl;
+      return;
+    }
     cin.ignore();
 
     newLearner = new Schoolboy(name, age, schoolName, grade);

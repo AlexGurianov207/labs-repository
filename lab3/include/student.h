@@ -9,6 +9,10 @@ class Student : public Learner {
   std::string faculty;
   int course;
 
+  static constexpr int minCourse = 1;
+  static constexpr int maxCourse = 6;
+  static constexpr int defaultCourse = 1;
+
  public:
   Student();
   Student(const std::string& newName, int age, const std::string& newUniversity,
@@ -19,6 +23,10 @@ class Student : public Learner {
   int getCourse() const;
   void display() const override;
   std::string getType() const override;
+
+  static bool isValidCourse(int course);
+  static int getMinCourse() { return minCourse; }
+  static int getMaxCourse() { return maxCourse; }
 };
 
 #endif

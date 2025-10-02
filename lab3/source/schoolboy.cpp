@@ -1,6 +1,7 @@
 #include "schoolboy.h"
 
-Schoolboy::Schoolboy() : Learner(), schoolName("Undefined"), grade(1) {}
+Schoolboy::Schoolboy()
+    : Learner(), schoolName("Undefined"), grade(defaultGrade) {}
 
 Schoolboy::Schoolboy(const std::string& newName, int newAge,
                      const std::string& newSchoolName, int newGrade)
@@ -20,3 +21,7 @@ std::string Schoolboy::getType() const { return "Schoolboy"; }
 std::string Schoolboy::getSchoolName() const { return schoolName; }
 
 int Schoolboy::getGrade() const { return grade; }
+
+bool Schoolboy::isValidGrade(int grade) {
+  return grade >= minGrade && grade <= maxGrade;
+}

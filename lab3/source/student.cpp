@@ -1,7 +1,10 @@
 #include "student.h"
 
 Student::Student()
-    : Learner(), university("Undefined"), faculty("Undefined"), course(1) {}
+    : Learner(),
+      university("Undefined"),
+      faculty("Undefined"),
+      course(defaultCourse) {}
 
 Student::Student(const std::string& newName, int newAge,
                  const std::string& newUniversity,
@@ -28,3 +31,7 @@ std::string Student::getUniversity() const { return university; }
 std::string Student::getFaculty() const { return faculty; }
 
 int Student::getCourse() const { return course; }
+
+bool Student::isValidCourse(int course) {
+  return course >= minCourse && course <= maxCourse;
+}
