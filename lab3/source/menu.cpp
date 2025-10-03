@@ -160,6 +160,7 @@ void addNewLearner(Learner**& learners, int& count) {
   }
   cin.ignore();
 
+
   Learner* newLearner = nullptr;
 
   if (type == learnerTypeStudent) {
