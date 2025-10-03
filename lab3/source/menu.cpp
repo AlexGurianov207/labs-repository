@@ -148,6 +148,7 @@ void addNewLearner(Learner**& learners, int& count) {
     return;
   }
 
+
   cout << "Enter the age:";
   cin >> age;
   if (cin.fail() || !Learner::isValidAge(age)) {
