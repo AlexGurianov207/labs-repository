@@ -35,3 +35,4 @@ int Student::getCourse() const { return course; }
 bool Student::isValidCourse(int course) {
     return course >= minCourse && course <= maxCourse;
 }
+
