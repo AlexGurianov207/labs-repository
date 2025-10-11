@@ -23,11 +23,23 @@ public:
 	T& operator[](int index);
 	const T& operator[](int index) const;
 
-	template<typename U>
-	friend std::istream& operator>>(std::istream& inputStream, MyArray<U>& myArray);
+	friend std::istream& operator>>(std::istream& inputStream, MyArray& myArray) {
+		for (size_t i = 0; i < myArray.size; i++) {
+			inputStream >> myArray.data[i];
+		}
+		return inputStream;
+	}
 
-	template<typename U>
-	friend std::ostream& operator<<(std::ostream& outputStream, const MyArray<U>& myArray);
+	friend std::ostream& operator<<(std::ostream& outputStream, const MyArray& myArray) {
+		if (myArray.isEmpty()) {
+			outputStream << "[Empty array]\n";
+			return outputStream;
+		}
+		for (size_t i = 0; i < myArray.size; i++) {
+			outputStream << myArray.data[i] << " ";
+		}
+		return outputStream;
+	}
 
 	int getIndexOfLastElement() const;
 	int getSize() const;
@@ -140,26 +152,6 @@ const T& MyArray<T>::operator[](int index) const {
 template<typename T>
 int MyArray<T>::getIndexOfLastElement() const {
 	return size > 0 ? size - 1 : 0;
-}
-
-template<typename T>
-std::istream& operator>>(std::istream& inputStream, MyArray<T>& myArray) {
-	for (size_t i = 0; i < myArray.size; i++) {
-		inputStream >> myArray.data[i];
-	}
-	return inputStream;
-}
-
-template<typename T>
-std::ostream& operator<<(std::ostream& outputStream, const MyArray<T>& myArray) {
-	if (myArray.isEmpty()) {
-		outputStream << "[Empty array]\n";
-		return outputStream;
-	}
-	for (size_t i = 0; i < myArray.size; i++) {
-		outputStream << myArray.data[i] << " ";
-	}
-	return outputStream;
 }
 
 template<typename T>
