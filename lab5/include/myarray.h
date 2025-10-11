@@ -7,7 +7,7 @@
 template<typename T>
 class MyArray {
 private:
-	T* data;
+	T* data = nullptr;
 	int size;
 
 public:
@@ -38,12 +38,12 @@ public:
 };
 
 template<typename T>
-MyArray<T>::MyArray() :data(nullptr), size(0) {
+MyArray<T>::MyArray() :size(0) {
 
 }
 
 template<typename T>
-MyArray<T>::MyArray(int newSize) : size(newSize), data(nullptr) {
+MyArray<T>::MyArray(int newSize) : size(newSize){
 	if (size > 0) {
 		data = new T[size];
 		for (size_t i = 0; i < size; i++) {
@@ -55,7 +55,7 @@ MyArray<T>::MyArray(int newSize) : size(newSize), data(nullptr) {
 }
 
 template<typename T>
-MyArray<T>::MyArray(const MyArray& other) :size(other.size), data(nullptr) {
+MyArray<T>::MyArray(const MyArray& other) :size(other.size){
 	if (size > 0) {
 		data = new T[size];
 		for (size_t i = 0; i < size; i++) {
