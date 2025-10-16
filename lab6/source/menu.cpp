@@ -11,28 +11,71 @@ void showMenu() {
 }
 
 void testConstructors() {
-	try {
-		Date defaultDate;
-		cout << defaultDate << endl;
+    try {
+        cout << "Default constructor:";
+        Date defaultDate;
+        cout << defaultDate << endl;
+    }
+    catch (const exception& ex) {
+        cout << "Error:" << ex.what() << endl;
+    }
 
-		Date firstDate("13/03/23");
-		cout << firstDate << endl;
+    try {
+        cout << "Valid date (23/03/15):";
+        Date firstDate("23/03/15");
+        cout << firstDate << endl;
+    }
+    catch (const exception& ex) {
+        cout << "Error:" << ex.what() << endl;
+    }
 
-		Date secondDate("35/04/32");
-		cout << secondDate << endl;
+    try {
+        cout << "Invalid month (13/13/23):";
+        Date secondDate("13/13/23");
+        cout << secondDate << endl;
+    }
+    catch (const exception& ex) {
+        cout << ex.what() << endl;
+    }
 
-	}
-	catch (const DateException& ex) {
-		cout << "Constructors error:" << ex.what() << endl;
-	}
+    try {
+        cout << "Invalid day (23/02/30):";
+        Date thirdDate("23/02/30");
+        cout << thirdDate << endl;
+    }
+    catch (const exception& ex) {
+        cout << ex.what() << endl;
+    }
+
+    try {
+        cout << "Invalid format (230315):";
+        Date fourthDate("230315");
+        cout << fourthDate << endl;
+    }
+    catch (const exception& ex) {
+        cout << ex.what() << endl;
+    }
+
+    try {
+        cout << "Leap year (24/02/29):";
+        Date fifthDate("24/02/29");
+        cout << fifthDate << endl;
+    }
+    catch (const exception& ex) {
+        cout << ex.what() << endl;
+    }
 }
 
 void testInputDate(Date& myDate) {
 	try {
-		cout << "Enter the date:";
+		cout << "Enter the date (YY/MM/DD):";
 		cin >> myDate;
+		cout << "Success setting!" << endl;
 	}
 	catch (const exception& ex) {
-		cout << ex.what() << endl;
+		cout << "Input error:" << ex.what() << endl;
+
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	}
 }

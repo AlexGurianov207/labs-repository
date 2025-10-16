@@ -7,18 +7,21 @@ class Date {
 private:
 	std::string date;
 
-	void isValidDate() const;
+	static constexpr const char* defaultDate = "01/01/01";
+	static constexpr int formatSizeDate = 8;
+
+	void isValidDate(const std::string& dateStr) const;
 public:
 	Date();
 	explicit Date(const std::string& newDate);
+
+	void setDate(const std::string& newDate);
 
 	friend std::istream& operator>>(std::istream& inputStream, Date& myDate) {
 		std::string buffer;
 		inputStream >> buffer;
 
-		Date temp(buffer);
-
-		myDate.date = temp.date;
+		myDate.setDate(buffer);
 
 		return inputStream;
 	}

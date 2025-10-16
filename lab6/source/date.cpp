@@ -1,36 +1,41 @@
 #include"date.h"
 
-Date::Date():date("01/01/01") {
+void Date::setDate(const std::string& newDate) {
+    isValidDate(newDate);
+    date = newDate;
+}
+
+Date::Date():date(defaultDate) {
 
 }
 
-Date::Date(const std::string& newDate):date(newDate) {
-    isValidDate();
+Date::Date(const std::string& newDate) {
+    setDate(newDate);
 }
 
-void Date::isValidDate() const {
-    if (date.length() != 8) {
+void Date::isValidDate(const std::string& dateStr) const {
+    if (dateStr.length() != formatSizeDate) {
         throw DateException("Invalid format.Should be 8 symbols - YY/MM/DD");
     }
-    if (date[2] != '/' || date[5] != '/') {
+    if (dateStr[2] != '/' || dateStr[5] != '/') {
         throw DateException("Invalid format.Should be - YY/MM/DD");
     }
 
-    if (!(isdigit(date[0]) && isdigit(date[1]))) {
+    if (!(isdigit(dateStr[0]) && isdigit(dateStr[1]))) {
         throw DateException("YY - should be digits");
     }
 
-    if (!(isdigit(date[3]) && isdigit(date[4]))) {
+    if (!(isdigit(dateStr[3]) && isdigit(dateStr[4]))) {
         throw DateException("MM - should be digits");
     }
 
-    if (!(isdigit(date[6]) && isdigit(date[7]))) {
+    if (!(isdigit(dateStr[6]) && isdigit(dateStr[7]))) {
         throw DateException("DD - should be digits");
     }
 
-    int year = (date[0] - '0') * 10 + (date[1] - '0');
-    int month = (date[3] - '0') * 10 + (date[4] - '0');
-    int day = (date[6] - '0') * 10 + (date[7] - '0');
+    int year = (dateStr[0] - '0') * 10 + (dateStr[1] - '0');
+    int month = (dateStr[3] - '0') * 10 + (dateStr[4] - '0');
+    int day = (dateStr[6] - '0') * 10 + (dateStr[7] - '0');
 
     if (month > 12 || month < 1) {
         throw DateException("The number of months cannot exceed 12 or be less than 1");
