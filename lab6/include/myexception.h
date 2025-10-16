@@ -9,7 +9,7 @@ private:
 	std::string message;
 
 public:
-	DateException(std::string newMessage);
+	explicit DateException(std::string newMessage);
 	const char* what() const noexcept override;
 
 };

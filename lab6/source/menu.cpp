@@ -16,7 +16,7 @@ void testConstructors() {
         Date defaultDate;
         cout << defaultDate << endl;
     }
-    catch (const exception& ex) {
+    catch (const DateException& ex) {
         cout << "Error:" << ex.what() << endl;
     }
 
@@ -25,7 +25,7 @@ void testConstructors() {
         Date firstDate("23/03/15");
         cout << firstDate << endl;
     }
-    catch (const exception& ex) {
+    catch (const DateException& ex) {
         cout << "Error:" << ex.what() << endl;
     }
 
@@ -34,7 +34,7 @@ void testConstructors() {
         Date secondDate("13/13/23");
         cout << secondDate << endl;
     }
-    catch (const exception& ex) {
+    catch (const DateException& ex) {
         cout << ex.what() << endl;
     }
 
@@ -43,7 +43,7 @@ void testConstructors() {
         Date thirdDate("23/02/30");
         cout << thirdDate << endl;
     }
-    catch (const exception& ex) {
+    catch (const DateException& ex) {
         cout << ex.what() << endl;
     }
 
@@ -52,7 +52,7 @@ void testConstructors() {
         Date fourthDate("230315");
         cout << fourthDate << endl;
     }
-    catch (const exception& ex) {
+    catch (const DateException& ex) {
         cout << ex.what() << endl;
     }
 
@@ -61,7 +61,7 @@ void testConstructors() {
         Date fifthDate("24/02/29");
         cout << fifthDate << endl;
     }
-    catch (const exception& ex) {
+    catch (const DateException& ex) {
         cout << ex.what() << endl;
     }
 }
@@ -72,7 +72,7 @@ void testInputDate(Date& myDate) {
 		cin >> myDate;
 		cout << "Success setting!" << endl;
 	}
-	catch (const exception& ex) {
+	catch (const DateException& ex) {
 		cout << "Input error:" << ex.what() << endl;
 
         cin.clear();
