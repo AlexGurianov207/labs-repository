@@ -9,6 +9,7 @@ class MyArray {
  private:
   T* data = nullptr;
   int size;
+  static inline T invalidValue = T();
 
  public:
   MyArray();
@@ -105,15 +106,13 @@ template <typename T>
 T& MyArray<T>::operator[](int index) {
   if (isEmpty()) {
     std::cout
-        << "Error.Array is empty.The element is assigned the default value:";
-    static T defaultValue = T();
-    return defaultValue;
+        << "Error.Array is empty.The element is assigned the invalid value:";
+    return invalidValue;
   }
   if (!(isValidIndex(index))) {
-    static T defaultValue = T();
     std::cout << "Error:going beyond the array boundary.The element is "
-                 "assigned the default value:";
-    return defaultValue;
+                 "assigned the invalid value:";
+    return invalidValue;
   } else {
     return data[index];
   }
@@ -135,15 +134,13 @@ template <typename T>
 const T& MyArray<T>::operator[](int index) const {
   if (isEmpty()) {
     std::cout
-        << "Error.Array is empty.The element is assigned the default value:";
-    static T defaultValue = T();
-    return defaultValue;
+        << "Error.Array is empty.The element is assigned the invalid value:";
+    return invalidValue;
   }
   if (!(isValidIndex(index))) {
-    static T defaultValue = T();
     std::cout << "Error:going beyond the array boundary.The element is "
-                 "assigned the default value:";
-    return defaultValue;
+                 "assigned the invalid value:";
+    return invalidValue;
   } else {
     return data[index];
   }
