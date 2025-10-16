@@ -13,7 +13,13 @@ Date::Date(const std::string& newDate) {
     setDate(newDate);
 }
 
+
 void Date::isValidDate(const std::string& dateStr) const {
+    isFormatDate(dateStr);
+    isTrueDate(dateStr);
+}
+
+void Date::isFormatDate(const std::string& dateStr)const {
     if (dateStr.length() != formatSizeDate) {
         throw DateException("Invalid format.Should be 8 symbols - YY/MM/DD");
     }
@@ -32,7 +38,9 @@ void Date::isValidDate(const std::string& dateStr) const {
     if (!(isdigit(dateStr[6]) && isdigit(dateStr[7]))) {
         throw DateException("DD - should be digits");
     }
+}
 
+void Date::isTrueDate(const std::string& dateStr)const {
     int year = (dateStr[0] - '0') * 10 + (dateStr[1] - '0');
     int month = (dateStr[3] - '0') * 10 + (dateStr[4] - '0');
     int day = (dateStr[6] - '0') * 10 + (dateStr[7] - '0');

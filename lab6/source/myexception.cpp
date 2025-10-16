@@ -1,6 +1,6 @@
 #include"myexception.h"
 
-DateException::DateException(const std::string newMessage):message(newMessage) {
+DateException::DateException(const std::string& newMessage):message(newMessage) {
 
 }
 

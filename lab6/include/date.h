@@ -11,6 +11,8 @@ private:
 	static constexpr int formatSizeDate = 8;
 
 	void isValidDate(const std::string& dateStr) const;
+	void isFormatDate(const std::string& dateStr) const;
+	void isTrueDate(const std::string& dateStr) const;
 public:
 	Date();
 	explicit Date(const std::string& newDate);
