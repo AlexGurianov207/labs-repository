@@ -5,9 +5,10 @@ using namespace std;
 void showMenu() {
 	cout << "----------MENU----------" << endl;
 	cout << "1. Test constructors" << endl;
-	cout << "2. Enter the date" << endl;
-	cout << "3. Print the date" << endl;
+	cout << "2. Date entry test" << endl;
+    cout << "3. Show current date" << endl;
 	cout << "0. Exit" << endl;
+    cout << "Your choice:" << endl;
 }
 
 void testConstructors() {
@@ -66,11 +67,11 @@ void testConstructors() {
     }
 }
 
-void testInputDate(Date& myDate) {
+void testInputDate(Date& mainDate) {
 	try {
 		cout << "Enter the date (YY/MM/DD):";
-		cin >> myDate;
-		cout << "Success setting!" << endl;
+		cin >> mainDate;
+        cout << "The value " << mainDate << " of date was set succesfully" << endl;
 	}
 	catch (const DateException& ex) {
 		cout << "Input error:" << ex.what() << endl;
@@ -78,4 +79,8 @@ void testInputDate(Date& myDate) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	}
+}
+
+void showCurrentDate(const Date& mainDate) {
+    cout << mainDate << endl;
 }

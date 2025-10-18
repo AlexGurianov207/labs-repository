@@ -1,8 +1,7 @@
 #include"menu.h"
 
 int main() {
-    Date myDate;
-
+    Date mainDate;
     char choice;
 
     do {
@@ -17,10 +16,10 @@ int main() {
             testConstructors();
             break;
         case '2':
-            testInputDate(myDate);
+            testInputDate(mainDate);
             break;
         case '3':
-            std::cout << myDate << std::endl;
+            showCurrentDate(mainDate);
             break;
         case '0':
             std::cout << "Exit" << std::endl;

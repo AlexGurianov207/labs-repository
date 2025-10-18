@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include<exception>
+#include<string>
 
 class DateException:public std::exception {
 private:
@@ -11,7 +12,6 @@ private:
 public:
 	explicit DateException(const std::string& newMessage);
 	const char* what() const noexcept override;
-
 };
 
 #endif

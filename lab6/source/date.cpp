@@ -1,68 +1,65 @@
 #include"date.h"
 
-void Date::setDate(const std::string& newDate) {
-    isValidDate(newDate);
-    date = newDate;
+Date::Date(const std::string& newDate):date(newDate) {
+    isValidDate();
 }
 
-Date::Date():date(defaultDate) {
-
-}
-
-Date::Date(const std::string& newDate) {
-    setDate(newDate);
-}
-
-
-void Date::isValidDate(const std::string& dateStr) const {
-    isFormatDate(dateStr);
-    isTrueDate(dateStr);
-}
-
-void Date::isFormatDate(const std::string& dateStr)const {
-    if (dateStr.length() != formatSizeDate) {
-        throw DateException("Invalid format.Should be 8 symbols - YY/MM/DD");
+void Date::isValidDate() const {
+    if (date.empty()) {
+        return;
     }
-    if (dateStr[2] != '/' || dateStr[5] != '/') {
+    isTrueFormatDate();
+    isTrueDate();
+}
+
+void Date::isTrueFormatDate()const {
+    if (date.length() != formatSizeDate) {
+        throw DateException("Invalid format.Should be " + std::to_string(formatSizeDate) + " symbols - YY/MM/DD");
+    }
+    if (date[firstSeparatorPos] != '/' || date[secondSeparatorPos] != '/') {
         throw DateException("Invalid format.Should be - YY/MM/DD");
     }
 
-    if (!(isdigit(dateStr[0]) && isdigit(dateStr[1]))) {
+    if (!(isdigit(date[firstYearPos]) && isdigit(date[secondYearPos]))) {
         throw DateException("YY - should be digits");
     }
 
-    if (!(isdigit(dateStr[3]) && isdigit(dateStr[4]))) {
+    if (!(isdigit(date[firstMonthPos]) && isdigit(date[secondMonthPos]))) {
         throw DateException("MM - should be digits");
     }
 
-    if (!(isdigit(dateStr[6]) && isdigit(dateStr[7]))) {
+    if (!(isdigit(date[firstDayPos]) && isdigit(date[secondDayPos]))) {
         throw DateException("DD - should be digits");
     }
 }
 
-void Date::isTrueDate(const std::string& dateStr)const {
-    int year = (dateStr[0] - '0') * 10 + (dateStr[1] - '0');
-    int month = (dateStr[3] - '0') * 10 + (dateStr[4] - '0');
-    int day = (dateStr[6] - '0') * 10 + (dateStr[7] - '0');
+bool Date::isLeapYear(int year) const {
+    const int baseYear = 2000;
+    int fullYear = baseYear + year;
+    return (fullYear % leapDivisor4 == 0 && fullYear % leapDivisor100 != 0) || (fullYear % leapDivisor400 == 0);
+}
 
-    if (month > 12 || month < 1) {
-        throw DateException("The number of months cannot exceed 12 or be less than 1");
+int Date::getMaxTrueDay(int month,int year) const {
+    switch (month){
+    case february:return isLeapYear(year) ? leapDaysFebruary : notLeapDaysFebruary;
+    case april:case june:case september:case november:return maxNumberOfDayInSpecialMonth;
+    default:return maxNumberOfDay;
+    }
+}
+
+void Date::isTrueDate()const {
+    static const int decimalBase = 10;
+    int year = (date[firstYearPos] - '0') * decimalBase + (date[secondYearPos] - '0');
+    int month = (date[firstMonthPos] - '0') * decimalBase + (date[secondMonthPos] - '0');
+    int day = (date[firstDayPos] - '0') * decimalBase + (date[secondDayPos] - '0');
+
+    if (month > maxNumberOfMonth || month < minNumberOfMonth) {
+        throw DateException("The number of months cannot exceed " + std::to_string(maxNumberOfMonth) + " or be less than " + std::to_string(minNumberOfMonth));
     }
 
-    if (day < 1 || day > 31) {
-        throw DateException("The number of days cannot exceed 31 or be less than 1");
-    }
+    int maxTrueDayInMonth = getMaxTrueDay(month,year);
 
-    if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) {
-        throw DateException("The month you entered cannot have more than 30 days");
-    }
-
-    if (month == 2) {
-        if (((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) && day > 29) {
-            throw DateException("In a leap year, February cannot have more than 29 days");
-        }
-        if (!((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) && day > 28) {
-            throw DateException("February cannot have more than 28 days");
-        }
+    if (day < minNumberOfDay || day > maxTrueDayInMonth) {
+        throw DateException("The day number for this month must be between " + std::to_string(minNumberOfDay) + " and " + std::to_string(maxTrueDayInMonth));
     }
 }

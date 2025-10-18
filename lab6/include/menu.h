@@ -5,9 +5,10 @@
 
 void showMenu();
 
-void testInputDate(Date& myDate);
+void testInputDate(Date& mainDate);
 
 void testConstructors();
 
+void showCurrentDate(const Date& mainDate);
 
 #endif
