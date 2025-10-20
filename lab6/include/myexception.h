@@ -1,17 +1,17 @@
 #ifndef MYEXCEPTION_H
 #define MYEXCEPTION_H
 
-#include<iostream>
-#include<exception>
-#include<string>
+#include <exception>
+#include <iostream>
+#include <string>
 
-class DateException:public std::exception {
-private:
-	std::string message;
+class DateException : public std::exception {
+ private:
+  std::string message;
 
-public:
-	explicit DateException(const std::string& newMessage);
-	const char* what() const noexcept override;
+ public:
+  explicit DateException(const std::string& newMessage);
+  const char* what() const noexcept override;
 };
 
 #endif
