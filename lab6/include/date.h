@@ -5,7 +5,7 @@
 
 class Date {
  private:
-  std::string date;  // YY/MM|DD
+  std::string date;
 
   static constexpr int formatSizeDate = 8;
   static constexpr int maxNumberOfMonth = 12;
@@ -57,7 +57,6 @@ class Date {
       myDate.isValidDate();
     } catch (...) {
       myDate.date = oldDate;
-      inputStream.setstate(std::ios::failbit);
       throw;
     }
 

@@ -69,7 +69,6 @@ void testInputDate(Date& mainDate) {
   } catch (const DateException& ex) {
     cout << "Input error:" << ex.what() << endl;
 
-    cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
   }
 }
