@@ -1,7 +1,5 @@
 #include "employeefinder.h"
 
-EmployeeFinder::EmployeeFinder() : count(0), names(nullptr) {}
-
 void EmployeeFinder::findEmployeeByHoursWorked(int targetHours) {
   delete[] names;
   names = nullptr;
@@ -18,7 +16,7 @@ void EmployeeFinder::findEmployeeByHoursWorked(int targetHours) {
 
   while (file >> myEmployee) {
     if (myEmployee.getHoursWorkedPerMonth() == targetHours) {
-      std::string* temp = new std::string[count + 1];
+      auto temp = new std::string[count + 1];
       for (size_t i = 0; i < count; i++) {
         temp[i] = names[i];
       }

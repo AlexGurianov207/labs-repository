@@ -5,14 +5,12 @@
 
 class EmployeeFinder {
  private:
-  std::string* names;
-  int count;
+	 std::string* names = nullptr;
+	 int count = 0;
 
   void findEmployeeByHoursWorked(int targetHours);
 
  public:
-  EmployeeFinder();
-
   void seeFullNamesOfEmployeeByHoursWorked(int targetHours);
 
   ~EmployeeFinder();
