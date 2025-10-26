@@ -40,14 +40,14 @@ class Employee {
     std::string name;
     int hoursWorked;
     int number;
-    int hourlyRate;
+    int rate;
     std::getline(is, name);
     myEmployee.setFullName(name);
-    is >> number >> hoursWorked >> hourlyRate;
+    is >> number >> hoursWorked >> rate;
     is.ignore();
     myEmployee.setServiceNumber(number);
     myEmployee.setHoursWorkedPerMonth(hoursWorked);
-    myEmployee.setHourlyRate(hourlyRate);
+    myEmployee.setHourlyRate(rate);
     return is;
   }
 };
