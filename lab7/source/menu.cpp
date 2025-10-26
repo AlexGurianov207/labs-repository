@@ -68,15 +68,15 @@ void addEmployeeToFile() {
   myEmployee.setHoursWorkedPerMonth(hoursWorked);
 
   std::cout << "Enter the hourly rate:";
-  int hourlyRate;
-  std::cin >> hourlyRate;
-  if (std::cin.fail() || hourlyRate <= 0) {
+  int rate;
+  std::cin >> rate;
+  if (std::cin.fail() || rate <= 0) {
     std::cout << "Error:Rate should be positive digit" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cin.clear();
     return;
   }
-  myEmployee.setHourlyRate(hourlyRate);
+  myEmployee.setHourlyRate(rate);
 
   std::ofstream file("data.txt", std::ios::app);
 
