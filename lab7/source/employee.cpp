@@ -10,8 +10,8 @@ Employee::Employee(const std::string& newFullName, int newServiceNumber,
                    int newHoursWorkedPerMonth, int newHourlyRate)
     : fullName(newFullName),
       serviceNumber(newServiceNumber),
-      hourlyRate(newHourlyRate),
-      hoursWorkedPerMonth(newHoursWorkedPerMonth) {}
+      hoursWorkedPerMonth(newHoursWorkedPerMonth),
+      hourlyRate(newHourlyRate) {}
 
 std::string Employee::getFullName() const { return fullName; }
 
