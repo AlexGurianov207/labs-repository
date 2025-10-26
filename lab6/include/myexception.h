@@ -14,4 +14,12 @@ class DateException : public std::exception {
   const char* what() const noexcept override;
 };
 
+class TrueDateException :public std::exception {
+private:
+	std::string message;
+public:
+	explicit TrueDateException(const std::string& newMessage);
+	const char* what() const noexcept override;
+};
+
 #endif

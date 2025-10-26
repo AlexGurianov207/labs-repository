@@ -19,6 +19,11 @@ void testConstructors() {
   } catch (const DateException& ex) {
     cout << "Error:" << ex.what() << endl;
   }
+  catch (const TrueDateException& ex) {
+      cout << "Input error:" << ex.what() << endl;
+
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  }
 
   try {
     cout << "Valid date (23/03/15):";
@@ -26,6 +31,11 @@ void testConstructors() {
     cout << firstDate << endl;
   } catch (const DateException& ex) {
     cout << "Error:" << ex.what() << endl;
+  }
+  catch (const TrueDateException& ex) {
+      cout << "Input error:" << ex.what() << endl;
+
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
   }
 
   try {
@@ -35,6 +45,11 @@ void testConstructors() {
   } catch (const DateException& ex) {
     cout << ex.what() << endl;
   }
+  catch (const TrueDateException& ex) {
+      cout << "Input error:" << ex.what() << endl;
+
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  }
 
   try {
     cout << "Invalid day (23/02/30):";
@@ -42,6 +57,11 @@ void testConstructors() {
     cout << thirdDate << endl;
   } catch (const DateException& ex) {
     cout << ex.what() << endl;
+  }
+  catch (const TrueDateException& ex) {
+      cout << "Input error:" << ex.what() << endl;
+
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
   }
 
   try {
@@ -51,6 +71,11 @@ void testConstructors() {
   } catch (const DateException& ex) {
     cout << ex.what() << endl;
   }
+  catch (const TrueDateException& ex) {
+      cout << "Input error:" << ex.what() << endl;
+
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  }
 
   try {
     cout << "Leap year (24/02/29):";
@@ -58,6 +83,11 @@ void testConstructors() {
     cout << fifthDate << endl;
   } catch (const DateException& ex) {
     cout << ex.what() << endl;
+  }
+  catch (const TrueDateException& ex) {
+      cout << "Input error:" << ex.what() << endl;
+
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
   }
 }
 
@@ -70,6 +100,11 @@ void testInputDate(Date& mainDate) {
     cout << "Input error:" << ex.what() << endl;
 
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  }
+  catch (const TrueDateException& ex) {
+      cout << "Input error:" << ex.what() << endl;
+
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
   }
 }
 
