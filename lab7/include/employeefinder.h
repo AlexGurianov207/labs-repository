@@ -11,6 +11,9 @@ class EmployeeFinder {
   void findEmployeeByHoursWorked(int targetHours);
 
  public:
+	 EmployeeFinder() = default;
+	 EmployeeFinder(const EmployeeFinder& other) = delete;
+	 EmployeeFinder& operator=(const EmployeeFinder& other) = delete;
   void seeFullNamesOfEmployeeByHoursWorked(int targetHours);
 
   ~EmployeeFinder();

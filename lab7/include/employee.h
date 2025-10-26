@@ -22,7 +22,7 @@ class Employee {
   int getHoursWorkedPerMonth() const;
   int getHourlyRate() const;
 
-  void setFullName(const std::string& newFullName);
+  void setFullName(const std::string_view newFullName);
   void setServiceNumber(int newServiceNumber);
   void setHoursWorkedPerMonth(int newHoursWorkedPerMonth);
   void setHourlyRate(int newHourlyRate);

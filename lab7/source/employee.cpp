@@ -21,7 +21,7 @@ int Employee::getHoursWorkedPerMonth() const { return hoursWorkedPerMonth; }
 
 int Employee::getHourlyRate() const { return hourlyRate; }
 
-void Employee::setFullName(const std::string& newFullName) {
+void Employee::setFullName(const std::string_view newFullName) {
   fullName = newFullName;
 }
 
