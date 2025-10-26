@@ -65,7 +65,7 @@ void Date::isTrueDate() const {
       (date[firstDayPos] - '0') * decimalBase + (date[secondDayPos] - '0');
 
   if (month > maxNumberOfMonth || month < minNumberOfMonth) {
-    throw TrueDateException(
+    throw DateException(
         std::format("The number of months cannot exceed {} or be less than {}",
                     maxNumberOfMonth, minNumberOfMonth));
   }
@@ -73,7 +73,7 @@ void Date::isTrueDate() const {
   int maxTrueDayInMonth = getMaxTrueDay(month, year);
 
   if (day < minNumberOfDay || day > maxTrueDayInMonth) {
-    throw TrueDateException(
+    throw DateException(
         std::format("The day number for this month must be between {} and {}",
                     minNumberOfDay, maxTrueDayInMonth));
   }

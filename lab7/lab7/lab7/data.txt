@@ -1,8 +1,0 @@
-Kozel
-6 66 6
-Y
-2 3 1
-ok
-4 5 6
-Efimchik
-23 3 2
