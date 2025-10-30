@@ -1,8 +1,9 @@
 #include "employeefinder.h"
 
-std::string* EmployeeFinder::findEmployeeByHoursWorked(int targetHours,int& count) {
-    count = 0;
-    std::string* names = nullptr;
+std::string* EmployeeFinder::findEmployeeByHoursWorked(int targetHours,
+                                                       int& count) {
+  count = 0;
+  std::string* names = nullptr;
 
   std::ifstream file("data.txt");
 
@@ -33,8 +34,8 @@ std::string* EmployeeFinder::findEmployeeByHoursWorked(int targetHours,int& coun
 }
 
 void EmployeeFinder::seeFullNamesOfEmployeeByHoursWorked(int targetHours) {
-    int count = 0;
-  std::string* resultNames = findEmployeeByHoursWorked(targetHours,count);
+  int count = 0;
+  std::string* resultNames = findEmployeeByHoursWorked(targetHours, count);
 
   if (count == 0) {
     std::cout << "No need employees" << std::endl;

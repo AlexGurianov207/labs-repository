@@ -46,52 +46,49 @@ void addEmployeeToFile() {
 
   int number;
   while (true) {
-      std::cout << "Enter the service number:";
-      std::cin >> number;
+    std::cout << "Enter the service number:";
+    std::cin >> number;
 
-      if (std::cin.fail() || number <= 0) {
-          std::cout << "Error: Number should be positive digit" << std::endl;
-          std::cin.clear();
-          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      }
-      else {
-          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-          break;
-      }
+    if (std::cin.fail() || number <= 0) {
+      std::cout << "Error: Number should be positive digit" << std::endl;
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } else {
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      break;
+    }
   }
   myEmployee.setServiceNumber(number);
 
   int hoursWorked;
   while (true) {
-      std::cout << "Enter the hours worked per month:";
-      std::cin >> hoursWorked;
+    std::cout << "Enter the hours worked per month:";
+    std::cin >> hoursWorked;
 
-      if (std::cin.fail() || hoursWorked < 0) {
-          std::cout << "Error: Hours should be positive digit or zero" << std::endl;
-          std::cin.clear();
-          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      }
-      else {
-          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-          break;
-      }
+    if (std::cin.fail() || hoursWorked < 0) {
+      std::cout << "Error: Hours should be positive digit or zero" << std::endl;
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } else {
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      break;
+    }
   }
   myEmployee.setHoursWorkedPerMonth(hoursWorked);
 
   int rate;
   while (true) {
-      std::cout << "Enter the hourly rate:";
-      std::cin >> rate;
+    std::cout << "Enter the hourly rate:";
+    std::cin >> rate;
 
-      if (std::cin.fail() || rate <= 0) {
-          std::cout << "Error: Rate should be positive digit" << std::endl;
-          std::cin.clear();
-          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      }
-      else {
-          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-          break;
-      }
+    if (std::cin.fail() || rate <= 0) {
+      std::cout << "Error: Rate should be positive digit" << std::endl;
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } else {
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      break;
+    }
   }
   myEmployee.setHourlyRate(rate);
 
@@ -115,18 +112,17 @@ void findNamesBasedOnTheNumberOfHoursWorked() {
 
   int targetHoursWorked;
   while (true) {
-      std::cout << "Enter the target hours worked to find employees:";
-      std::cin >> targetHoursWorked;
+    std::cout << "Enter the target hours worked to find employees:";
+    std::cin >> targetHoursWorked;
 
-      if (std::cin.fail() || targetHoursWorked < 0) {
-          std::cout << "Error: Hours should be positive digit or zero" << std::endl;
-          std::cin.clear();
-          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      }
-      else {
-          std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-          break;
-      }
+    if (std::cin.fail() || targetHoursWorked < 0) {
+      std::cout << "Error: Hours should be positive digit or zero" << std::endl;
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } else {
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      break;
+    }
   }
 
   myEmployeeFinder.seeFullNamesOfEmployeeByHoursWorked(targetHoursWorked);
