@@ -1,15 +1,14 @@
 #include "employeefinder.h"
 
-void EmployeeFinder::findEmployeeByHoursWorked(int targetHours) {
-  delete[] names;
-  names = nullptr;
-  count = 0;
+std::string* EmployeeFinder::findEmployeeByHoursWorked(int targetHours,int& count) {
+    count = 0;
+    std::string* names = nullptr;
 
   std::ifstream file("data.txt");
 
   if (!file.is_open()) {
     std::cout << "Error in opening file" << std::endl;
-    return;
+    return nullptr;
   }
 
   Employee myEmployee;
@@ -28,12 +27,14 @@ void EmployeeFinder::findEmployeeByHoursWorked(int targetHours) {
 
   if (file.bad()) {
     std::cout << "Error in reading file" << std::endl;
-    return;
+    return nullptr;
   }
+  return names;
 }
 
 void EmployeeFinder::seeFullNamesOfEmployeeByHoursWorked(int targetHours) {
-  findEmployeeByHoursWorked(targetHours);
+    int count = 0;
+  std::string* resultNames = findEmployeeByHoursWorked(targetHours,count);
 
   if (count == 0) {
     std::cout << "No need employees" << std::endl;
@@ -41,8 +42,7 @@ void EmployeeFinder::seeFullNamesOfEmployeeByHoursWorked(int targetHours) {
   }
 
   for (int i = 0; i < count; i++) {
-    std::cout << "#" << (i + 1) << ":" << names[i] << std::endl;
+    std::cout << "#" << (i + 1) << ":" << resultNames[i] << std::endl;
   }
+  delete[] resultNames;
 }
-
-EmployeeFinder::~EmployeeFinder() { delete[] names; }

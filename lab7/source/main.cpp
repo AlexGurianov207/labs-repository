@@ -1,7 +1,7 @@
 #include "menu.h"
 
 int main() {
-  int choice;
+  char choice;
 
   do {
     showMenu();
@@ -11,19 +11,19 @@ int main() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     switch (choice) {
-      case 1:
+      case '1':
         readDataFromFile();
         break;
-      case 2:
+      case '2':
         addEmployeeToFile();
         break;
-      case 3:
+      case '3':
         findNamesBasedOnTheNumberOfHoursWorked();
         break;
-      case 4:
+      case '4':
         deleteDataFromFile();
         break;
-      case 0:
+      case '0':
         std::cout << "Exit" << std::endl;
         break;
       default:
@@ -31,7 +31,7 @@ int main() {
         break;
     }
 
-  } while (choice != 0);
+  } while (choice != '0');
 
   return 0;
 }
