@@ -2,9 +2,9 @@
 
 Employee::Employee()
     : fullName("Undefined"),
-      serviceNumber(0),
-      hoursWorkedPerMonth(0),
-      hourlyRate(0) {}
+      serviceNumber(defaultServiceNumber),
+      hoursWorkedPerMonth(defaultHours),
+      hourlyRate(defaultRate) {}
 
 Employee::Employee(const std::string& newFullName, int newServiceNumber,
                    int newHoursWorkedPerMonth, int newHourlyRate)

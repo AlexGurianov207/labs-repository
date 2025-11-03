@@ -49,7 +49,7 @@ void addEmployeeToFile() {
     std::cout << "Enter the service number:";
     std::cin >> number;
 
-    if (std::cin.fail() || number <= 0) {
+    if (std::cin.fail() || number < Employee::defaultServiceNumber) {
       std::cout << "Error: Number should be positive digit" << std::endl;
       std::cin.clear();
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -65,7 +65,7 @@ void addEmployeeToFile() {
     std::cout << "Enter the hours worked per month:";
     std::cin >> hoursWorked;
 
-    if (std::cin.fail() || hoursWorked < 0) {
+    if (std::cin.fail() || hoursWorked < Employee::defaultHours) {
       std::cout << "Error: Hours should be positive digit or zero" << std::endl;
       std::cin.clear();
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -81,7 +81,7 @@ void addEmployeeToFile() {
     std::cout << "Enter the hourly rate:";
     std::cin >> rate;
 
-    if (std::cin.fail() || rate <= 0) {
+    if (std::cin.fail() || rate <= Employee::defaultRate) {
       std::cout << "Error: Rate should be positive digit" << std::endl;
       std::cin.clear();
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -115,7 +115,7 @@ void findNamesBasedOnTheNumberOfHoursWorked() {
     std::cout << "Enter the target hours worked to find employees:";
     std::cin >> targetHoursWorked;
 
-    if (std::cin.fail() || targetHoursWorked < 0) {
+    if (std::cin.fail() || targetHoursWorked < Employee::defaultHours) {
       std::cout << "Error: Hours should be positive digit or zero" << std::endl;
       std::cin.clear();
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -137,6 +137,8 @@ void deleteDataFromFile() {
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
   if (confirm == 'y') {
-    std::ofstream("data.txt");
+    std::ofstream file("data.txt");
+    file.close();
+    std::cout << "All data deleted successfully!" << std::endl;
   }
 }

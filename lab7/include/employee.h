@@ -13,6 +13,10 @@ class Employee {
   int hourlyRate;
 
  public:
+  static constexpr int defaultServiceNumber = 1;
+  static constexpr int defaultHours = 0;
+  static constexpr int defaultRate = 0;
+
   Employee();
   Employee(const std::string& newFullName, int newServiceNumber,
            int newHoursWorkedPerMonth, int newHourlyRate);
