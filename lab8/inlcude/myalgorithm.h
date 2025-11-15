@@ -63,21 +63,43 @@ void MyAlgorithm<T>::sortContainer(MyContainer<T>& data) {
 
 	if (totalSize == 0)return;
 
-	T* temp = new T[totalSize];
+	T* temp = nullptr;
+    try {
+        temp = new T[totalSize];  // Выделяем память
 
-	int index = 0;
-	for (auto it = data.begin(); it != data.end(); ++it) {
-		temp[index++] = *it;
-	}
+        // Копируем данные в временный массив
+        int index = 0;
+        for (auto it = data.begin(); it != data.end(); ++it) {
+            if (index >= totalSize) {
+                throw MyException("Index out of bounds during copy");
+            }
+            temp[index++] = *it;
+        }
 
-	MyAlgorithm::quickSort(temp, 0, totalSize - 1);
+        // Сортируем
+        MyAlgorithm::quickSort(temp, 0, totalSize - 1);
 
-	index = 0;
-	for (auto it = data.begin(); it != data.end(); ++it) {
-		*it = temp[index++];
-	}
+        // Копируем обратно
+        index = 0;
+        for (auto it = data.begin(); it != data.end(); ++it) {
+            if (index >= totalSize) {
+                throw MyException("Index out of bounds during restore");
+            }
+            *it = temp[index++];
+        }
 
-	delete[] temp;
+        // Освобождаем память
+        delete[] temp;
+        temp = nullptr;
+    }
+    catch (...) {
+        // Освобождаем память при исключении
+        if (temp != nullptr) {
+            delete[] temp;
+            temp = nullptr;
+        }
+        throw;
+    }
 }
 
 #endif 
