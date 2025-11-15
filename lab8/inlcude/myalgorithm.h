@@ -36,16 +36,18 @@ void MyAlgorithm<T>::swap(T& a, T& b) {
 
 template<typename T>
 void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
-    // днаюбхрэ опнбепйх цпюмхж
+    // сяхкеммше опнбепйх
+    if (array == nullptr) return;
     if (left < 0 || right < 0 || left >= right) return;
 
-    // опнбепхрэ бюкхдмнярэ сйюгюрекъ
-    if (array == nullptr) return;
+    // опнбепхрэ бюкхдмнярэ дхюоюгнмю
+    if (left > right) return;
 
-    // опнбепхрэ хмдейя охбнрю
-    int pivotIndex = (right + left) / 2;
+    int pivotIndex = left + (right - left) / 2;  // аНКЕЕ АЕГНОЮЯМШИ ПЮЯВЕР
+
+    // опнбепхрэ бюкхдмнярэ хмдейяю охбнрю
     if (pivotIndex < left || pivotIndex > right) {
-        pivotIndex = left;  // хЯОНКЭГНБЮРЭ КЕБСЧ ЦПЮМХЖС ЙЮЙ ГЮОЮЯМНИ БЮПХЮМР
+        pivotIndex = left;
     }
 
     T pivot = array[pivotIndex];
@@ -54,23 +56,33 @@ void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
     int j = right;
 
     while (i <= j) {
-        // днаюбхрэ опнбепйх цпюмхж б жхйкюу
+        // опнбепърэ цпюмхжш б йюфдни хрепюжхх
+        if (i < left || i > right || j < left || j > right) break;
+
+        // хяонкэгнбюрэ <= Х >= дкъ хгаефюмхъ гюжхйкхбюмхъ
         while (i <= right && array[i] < pivot) i++;
         while (j >= left && array[j] > pivot) j--;
 
         if (i <= j) {
-            // опнбепхрэ хмдейяш оепед налемнл
+            // днонкмхрекэмюъ опнбепйю оепед налемнл
             if (i >= left && i <= right && j >= left && j <= right) {
                 swap(array[i], array[j]);
             }
             i++;
             j--;
+
+            // гюыхрю нр аеяйнмевмнцн жхйкю
+            if (i > right || j < left) break;
         }
     }
 
-    // пейспяхъ я опнбепйни цпюмхж
-    if (left < j) quickSort(array, left, j);
-    if (i < right) quickSort(array, i, right);
+    // пейспяхъ я опнбепйни бюкхдмнярх цпюмхж
+    if (left < j && j >= 0 && j < right) {
+        quickSort(array, left, j);
+    }
+    if (i < right && i >= left && i <= right) {
+        quickSort(array, i, right);
+    }
 }
 
 template<typename T>
