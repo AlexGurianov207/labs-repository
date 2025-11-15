@@ -60,7 +60,7 @@ MyContainer<T>::MyContainer(int newRows, int newCols) : rows(newRows), cols(newC
 	for (int i = 0; i < rows; i++) {
 		data[i] = new T[cols];
 		for (int j = 0; j < cols; j++) {
-			data[i][j] = T();  // ßâíàÿ èíèöèàëèçàöèÿ
+			data[i][j] = T();
 		}
 	}
 }
@@ -195,7 +195,6 @@ void MyContainer<T>::fillFromArray(const T* array, int size) {
 
 	for (int i = 0; i < rows && count < elementsToCopy; ++i) {
 		for (int j = 0; j < cols && count < elementsToCopy; ++j) {
-			// ÏÐÎÂÅÐÊÀ ÏÅÐÅÄ ÊÀÆÄÛÌ ÄÎÑÒÓÏÎÌ
 			if (count >= 0 && count < size) {
 				data[i][j] = array[count];
 			}

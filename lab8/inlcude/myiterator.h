@@ -32,8 +32,6 @@ public:
 	MyIterator& operator+=(int n);
 	MyIterator& operator-=(int n);
 
-	bool operator<(const MyIterator& other)const;
-
 	bool operator==(const MyIterator& other)const;
 
 	void getPosition(int& r, int& c) const;
@@ -159,11 +157,6 @@ template<typename T>
 MyIterator<T>& MyIterator<T>::operator-=(int n) {
 	*this = *this - n;
 	return *this;
-}
-
-template<typename T>
-bool MyIterator<T>::operator<(const MyIterator& other)const {
-	return (currentRow < other.currentRow) || (currentRow == other.currentRow && currentCol < other.currentCol);
 }
 
 template<typename T>
