@@ -8,6 +8,45 @@
 void showMenu();
 
 template<typename T>
+void menu() {
+    system("chcp 1251");
+
+    char choice;
+
+    MyContainer<T> matrix;
+
+    do {
+        showMenu();
+
+        std::cin >> choice;
+
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        switch (choice) {
+        case '1':
+            inputMatrix<T>(matrix);
+            break;
+        case '2':
+            printMatrix<T>(matrix);
+            break;
+        case '3':
+            findElement<T>(matrix);
+            break;
+        case '4':
+            sortMatrix<T>(matrix);
+            break;
+        case '0':
+            std::cout << "Exit" << std::endl;
+            break;
+        default:
+            std::cout << "Error" << std::endl;
+            break;
+        }
+
+    } while (choice != '0');
+}
+
+template<typename T>
 void printMatrix(const MyContainer<T>& matrix) {
 	matrix.print();
 }
@@ -135,4 +174,5 @@ void sortMatrix(MyContainer<T>& matrix) {
 	matrix.print();
 
 }
+
 #endif
