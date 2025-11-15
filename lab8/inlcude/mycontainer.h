@@ -195,7 +195,11 @@ void MyContainer<T>::fillFromArray(const T* array, int size) {
 
 	for (int i = 0; i < rows && count < elementsToCopy; ++i) {
 		for (int j = 0; j < cols && count < elementsToCopy; ++j) {
-			data[i][j] = array[count++];
+			// ÏÐÎÂÅÐÊÀ ÏÅÐÅÄ ÊÀÆÄÛÌ ÄÎÑÒÓÏÎÌ
+			if (count >= 0 && count < size) {
+				data[i][j] = array[count];
+			}
+			count++;
 		}
 	}
 }
