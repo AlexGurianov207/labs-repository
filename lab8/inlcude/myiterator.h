@@ -26,9 +26,6 @@ public:
 	MyIterator& operator--();
 	MyIterator operator--(int);
 
-	MyIterator operator+(int n)const;
-	MyIterator operator-(int n)const;
-
 	MyIterator& operator+=(int n);
 	MyIterator& operator-=(int n);
 
@@ -124,27 +121,6 @@ MyIterator<T> MyIterator<T>::operator--(int) {
 template<typename T>
 bool MyIterator<T>::operator==(const MyIterator& other)const {
 	return data == other.data && currentRow == other.currentRow && currentCol == other.currentCol;
-}
-
-template<typename T>
-MyIterator<T> MyIterator<T>::operator+(int n)const {
-	MyIterator temp = *this;
-	if (n >= 0) {
-		for (int i = 0; i < n; i++) {
-			++temp;
-		}
-	}
-	else {
-		for (int i = 0; i < -n; i++) {
-			--temp;
-		}
-	}
-	return temp;
-}
-
-template<typename T>
-MyIterator<T> MyIterator<T>::operator-(int n)const {
-	return *this + (-n);
 }
 
 template<typename T>
