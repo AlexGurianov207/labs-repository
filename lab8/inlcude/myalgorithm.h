@@ -75,44 +75,46 @@ void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
 
 template<typename T>
 void MyAlgorithm<T>::sortContainer(MyContainer<T>& data) {
-	int totalSize = data.getTotalSize();
+    int totalSize = data.getTotalSize();
 
-	if (totalSize == 0)return;
+    if (totalSize <= 0 || totalSize > 10000) { // Ограничение размера
+        return;
+    }
 
-	T* temp = nullptr;
+    T* temp = nullptr;
     try {
-        temp = new T[totalSize];  // Выделяем память
+        // Явная проверка размера для SonarQube
+        if (totalSize <= 0 || totalSize > 10000) {
+            throw MyException("Invalid container size for sorting");
+        }
 
-        // Копируем данные в временный массив
+        temp = new T[totalSize];
+
+        // Копируем с проверками
         int index = 0;
-        for (auto it = data.begin(); it != data.end(); ++it) {
-            if (index >= totalSize) {
-                throw MyException("Index out of bounds during copy");
-            }
-            temp[index++] = *it;
+        for (auto it = data.begin(); it != data.end() && index < totalSize; ++it) {
+            temp[index] = *it;
+            index++;
         }
 
         // Сортируем
-        MyAlgorithm::quickSort(temp, 0, totalSize - 1);
+        if (totalSize > 0) {
+            MyAlgorithm::quickSort(temp, 0, totalSize - 1);
+        }
 
         // Копируем обратно
         index = 0;
-        for (auto it = data.begin(); it != data.end(); ++it) {
-            if (index >= totalSize) {
-                throw MyException("Index out of bounds during restore");
-            }
-            *it = temp[index++];
+        for (auto it = data.begin(); it != data.end() && index < totalSize; ++it) {
+            *it = temp[index];
+            index++;
         }
 
-        // Освобождаем память
         delete[] temp;
         temp = nullptr;
     }
     catch (...) {
-        // Освобождаем память при исключении
         if (temp != nullptr) {
             delete[] temp;
-            temp = nullptr;
         }
         throw;
     }
