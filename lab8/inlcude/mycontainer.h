@@ -77,10 +77,7 @@ MyContainer<T>::MyContainer(const MyContainer& other):rows(other.rows),cols(othe
 }
 
 template<typename T>
-MyContainer<T>::MyContainer(MyContainer&& other)noexcept {
-	data = other.data;
-	rows = other.rows;
-	cols = other.cols;
+MyContainer<T>::MyContainer(MyContainer&& other)noexcept:data(other.data),rows(other.rows),cols(other.cols){
 	other.data = nullptr;
 	other.rows = 0;
 	other.cols = 0;
@@ -238,7 +235,7 @@ void MyContainer<T>::resize(int newRows, int newCols) {
 		throw MyException("Error.Size shouldn't be negative or zero");
 	}
 
-	T** newData = new T * [newRows];
+	auto newData = new T * [newRows];
 	try {
 		for (int i = 0; i < newRows; i++) {
 			newData[i] = new T[newCols]();
