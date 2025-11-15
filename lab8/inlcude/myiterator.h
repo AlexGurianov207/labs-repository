@@ -36,6 +36,7 @@ public:
 	bool isEnd() const;
 
 	bool isValid()const;
+	~MyIterator() = default;
 };
 
 template<typename T>
