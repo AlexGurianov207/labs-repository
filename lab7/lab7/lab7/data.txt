@@ -1,0 +1,16 @@
+Kozel
+1 66 3
+Sasha
+31 65 4
+Oleg
+23 44 5
+Efimchik
+78 23 1
+Fred
+90 44 2
+Andrew
+8 66 13
+Ivanov Ivan Ivanovich
+45 100 6
+Butor Kirill
+13 0 0
