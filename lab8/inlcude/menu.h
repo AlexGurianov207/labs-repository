@@ -14,7 +14,7 @@ void printMatrix(const MyContainer<T>& matrix) {
 
 template<typename T>
 void inputMatrix(MyContainer<T>& matrix) {
-    T* arr = nullptr;  // Инициализируем nullptr
+    T* arr = nullptr;
 
     try {
         std::cout << "Enter the rows number of matrix: ";
@@ -38,7 +38,7 @@ void inputMatrix(MyContainer<T>& matrix) {
         }
 
         int totalElements = newRows * newCols;
-        arr = new T[totalElements];  // Выделяем память
+        arr = new T[totalElements];
 
         std::cout << "Enter " << totalElements << " elements of matrix:" << std::endl;
 
@@ -53,35 +53,21 @@ void inputMatrix(MyContainer<T>& matrix) {
             }
         }
 
-        // Создаем/изменяем матрицу и заполняем данными
         matrix.resize(newRows, newCols);
         matrix.fillFromArray(arr, totalElements);
 
-        // Освобождаем временный массив
         delete[] arr;
         arr = nullptr;
 
         std::cout << "Matrix successfully created!" << std::endl;
     }
     catch (const MyException& ex) {
-        // Освобождаем память при исключении
         if (arr != nullptr) {
             delete[] arr;
             arr = nullptr;
         }
 
         std::cout << "Input error: " << ex.what() << std::endl;
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
-    catch (...) {
-        // Освобождаем память при любом исключении
-        if (arr != nullptr) {
-            delete[] arr;
-            arr = nullptr;
-        }
-
-        std::cout << "Unknown error during matrix input" << std::endl;
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
@@ -125,13 +111,11 @@ void findElement(MyContainer<T>& matrix) {
 template<typename T>
 void sortMatrix(MyContainer<T>& matrix) {
     try {
-        // ПРОВЕРИТЬ ПУСТУЮ МАТРИЦУ
         if (matrix.isEmpty()) {
             std::cout << "Matrix is empty! Cannot sort." << std::endl;
             return;
         }
 
-        // ПРОВЕРИТЬ РАЗМЕР МАТРИЦЫ
         if (matrix.getTotalSize() > 1000) {
             std::cout << "Matrix is too large for sorting." << std::endl;
             return;
@@ -145,7 +129,7 @@ void sortMatrix(MyContainer<T>& matrix) {
         std::cout << "Sorted matrix:" << std::endl;
         matrix.print();
     }
-    catch (const std::exception& e) {
+    catch (const MyException& e) {
         std::cout << "Sorting error: " << e.what() << std::endl;
     }
 }
