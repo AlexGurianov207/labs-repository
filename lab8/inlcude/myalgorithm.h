@@ -7,7 +7,8 @@
 template<typename T>
 class MyAlgorithm {
 private:
-    static void quickSort(T* array, int left, int right);
+    static void quickSortRecursive(T* array, int left, int right);
+    static int partition(T* array, int left, int right);
     static void swap(T& a, T& b);
     static bool validateIndex(const T* array, int index, int size);
 
@@ -23,12 +24,17 @@ bool MyAlgorithm<T>::validateIndex(const T* array, int index, int size) {
 
 template<typename T>
 MyIterator<T> MyAlgorithm<T>::find(MyContainer<T>& data, const T& value) {
-    for (auto it = data.begin(); it != data.end(); ++it) {
+    // петюйрнпхмц жхйкю - анкее вхрюелши бюпхюмр
+    MyIterator<T> it = data.begin();
+    MyIterator<T> end = data.end();
+
+    while (it != end) {
         if (*it == value) {
             return it;
         }
+        ++it;
     }
-    return data.end();
+    return end;
 }
 
 template<typename T>
@@ -39,53 +45,53 @@ void MyAlgorithm<T>::swap(T& a, T& b) {
 }
 
 template<typename T>
-void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
-    // цксанйхе опнбепйх дкъ SONARQUBE
+int MyAlgorithm<T>::partition(T* array, int left, int right) {
+    // аегноюямши бшанп нонпмнцн щкелемрю
+    if (!validateIndex(array, left, right + 1) || !validateIndex(array, right, right + 1)) {
+        return left;
+    }
+
+    int pivotIndex = left + (right - left) / 2;
+    if (!validateIndex(array, pivotIndex, right + 1)) {
+        pivotIndex = left;
+    }
+
+    T pivot = array[pivotIndex];
+    int i = left - 1;
+    int j = right + 1;
+
+    while (true) {
+        // петюйрнпхмц жхйкнб - аег бкнфеммшу сякнбхи
+        do {
+            i++;
+        } while (validateIndex(array, i, right + 1) && array[i] < pivot);
+
+        do {
+            j--;
+        } while (validateIndex(array, j, right + 1) && array[j] > pivot);
+
+        if (i >= j) {
+            return j;
+        }
+
+        if (validateIndex(array, i, right + 1) && validateIndex(array, j, right + 1)) {
+            swap(array[i], array[j]);
+        }
+    }
+}
+
+template<typename T>
+void MyAlgorithm<T>::quickSortRecursive(T* array, int left, int right) {
     if (array == nullptr) return;
     if (left < 0 || right < 0 || left >= right) return;
 
-    // днонкмхрекэмюъ опнбепйю дхюоюгнмю
-    if (left > right) return;
+    int partitionIndex = partition(array, left, right);
 
-    // аегноюямши пюявер охбнрю я опнбепйни
-    int pivotIndex = left + (right - left) / 2;
-
-    // цюпюмрхъ бюкхдмнярх хмдейяю охбнрю
-    if (pivotIndex < left) pivotIndex = left;
-    if (pivotIndex > right) pivotIndex = right;
-
-    // опнбепйю оепед днярсонл й щкелемрс
-    if (!validateIndex(array, pivotIndex, right + 1)) return;
-    T pivot = array[pivotIndex];
-
-    int i = left;
-    int j = right;
-
-    while (i <= j) {
-        // опнбепйх цпюмхж оепед йюфдшл днярсонл
-        while (i <= right && validateIndex(array, i, right + 1) && array[i] < pivot) i++;
-        while (j >= left && validateIndex(array, j, right + 1) && array[j] > pivot) j--;
-
-        if (i <= j && validateIndex(array, i, right + 1) && validateIndex(array, j, right + 1)) {
-            swap(array[i], array[j]);
-            i++;
-            j--;
-        }
-        else {
-            break; // гЮЫХРЮ НР ГЮЖХЙКХБЮМХЪ
-        }
-
-        // днонкмхрекэмюъ гюыхрю нр бшундю гю цпюмхжш
-        if (i < left) i = left;
-        if (j > right) j = right;
+    if (left < partitionIndex) {
+        quickSortRecursive(array, left, partitionIndex);
     }
-
-    // пейспяхъ я сяхкеммшлх опнбепйюлх
-    if (left < j && j >= 0 && j <= right) {
-        quickSort(array, left, j);
-    }
-    if (i < right && i >= left && i <= right) {
-        quickSort(array, i, right);
+    if (partitionIndex + 1 < right) {
+        quickSortRecursive(array, partitionIndex + 1, right);
     }
 }
 
@@ -93,7 +99,6 @@ template<typename T>
 void MyAlgorithm<T>::sortContainer(MyContainer<T>& data) {
     int totalSize = data.getTotalSize();
 
-    // ярпнцхе опнбепйх пюглепю
     if (totalSize <= 0) return;
     if (totalSize > 10000) {
         throw MyException("Container too large for sorting");
@@ -101,43 +106,34 @@ void MyAlgorithm<T>::sortContainer(MyContainer<T>& data) {
 
     T* temp = nullptr;
     try {
-        // бшдекемхе оюлърх я опнбепйни
         temp = new T[totalSize];
 
-        // ъбмюъ хмхжхюкхгюжхъ бяеу щкелемрнб
-        for (int i = 0; i < totalSize; i++) {
-            temp[i] = T(); // цЮПЮМРХПНБЮММЮЪ ХМХЖХЮКХГЮЖХЪ
-        }
-
-        // йнохпнбюмхе я опнбепйюлх цпюмхж
         int index = 0;
-        for (auto it = data.begin(); it != data.end() && index < totalSize; ++it) {
-            if (index >= 0 && index < totalSize) {
-                temp[index] = *it;
-            }
-            index++;
+        MyIterator<T> it = data.begin();
+        MyIterator<T> end = data.end();
+
+        while (it != end && index < totalSize) {
+            temp[index] = *it;
+            ++it;
+            ++index;
         }
 
-        // опнбепйю оепед янпрхпнбйни
         if (totalSize > 1 && temp != nullptr) {
-            quickSort(temp, 0, totalSize - 1);
+            quickSortRecursive(temp, 0, totalSize - 1);
         }
 
-        // напюрмне йнохпнбюмхе я опнбепйюлх
         index = 0;
-        for (auto it = data.begin(); it != data.end() && index < totalSize; ++it) {
-            if (index >= 0 && index < totalSize) {
-                *it = temp[index];
-            }
-            index++;
+        it = data.begin();
+        while (it != end && index < totalSize) {
+            *it = temp[index];
+            ++it;
+            ++index;
         }
 
-        // нябнанфдемхе оюлърх
         delete[] temp;
         temp = nullptr;
     }
     catch (...) {
-        // цюпюмрхпнбюммне нябнанфдемхе оюлърх
         if (temp != nullptr) {
             delete[] temp;
             temp = nullptr;

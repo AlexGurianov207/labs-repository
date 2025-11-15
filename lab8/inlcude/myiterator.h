@@ -36,8 +36,13 @@ public:
 	bool isEnd() const;
 
 	bool isValid()const;
-	~MyIterator() = default;
+	~MyIterator();
 };
+
+template<typename T>
+MyIterator<T>::~MyIterator() {
+	data = nullptr;
+}
 
 template<typename T>
 MyIterator<T>::MyIterator(T** matrix, int rows, int cols, int startRow, int startCol) :data(matrix), currentRow(startRow), currentCol(startCol), totalRows(rows), totalCols(cols) {
