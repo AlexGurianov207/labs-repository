@@ -33,21 +33,14 @@ public:
 	MyIterator& operator-=(int n);
 
 	bool operator<(const MyIterator& other)const;
-	bool operator>(const MyIterator& other)const;
-
-	bool operator>=(const MyIterator& other)const;
-	bool operator<=(const MyIterator& other)const;
 
 	bool operator==(const MyIterator& other)const;
-	bool operator!=(const MyIterator& other) const;
 
 	void getPosition(int& r, int& c) const;
 
 	bool isEnd() const;
 
 	bool isValid()const;
-
-	int operator-(const MyIterator& other)const;
 };
 
 template<typename T>
@@ -169,27 +162,8 @@ MyIterator<T>& MyIterator<T>::operator-=(int n) {
 }
 
 template<typename T>
-bool MyIterator<T>::operator!=(const MyIterator& other)const {
-	return !(*this == other);
-}
-
-template<typename T>
 bool MyIterator<T>::operator<(const MyIterator& other)const {
 	return (currentRow < other.currentRow) || (currentRow == other.currentRow && currentCol < other.currentCol);
-}
-
-template<typename T>
-bool MyIterator<T>::operator>(const MyIterator& other)const {
-	return other < *this;
-}
-template<typename T>
-bool MyIterator<T>::operator<=(const MyIterator& other) const {
-	return !(*this > other);
-}
-
-template<typename T>
-bool MyIterator<T>::operator>=(const MyIterator& other) const {
-	return !(*this < other);
 }
 
 template<typename T>
@@ -206,16 +180,6 @@ bool MyIterator<T>::isEnd()const {
 template<typename T>
 bool MyIterator<T>::isValid()const{
 	return currentRow >= 0 && currentRow < totalRows && currentCol >= 0 && currentCol < totalCols;
-}
-
-template<typename T>
-int MyIterator<T>::operator-(const MyIterator& other)const {
-	if (data != other.data) {
-		throw MyException("Error.Iterators point to different containers");
-	}
-	int this_pos = currentRow * totalCols + currentCol;
-	int other_pos = other.currentRow * totalCols + other.currentCol;
-	return this_pos - other_pos;
 }
 
 #endif
