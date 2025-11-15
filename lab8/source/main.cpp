@@ -9,7 +9,8 @@ int main() {
 
     char choice;
 
-    MyContainer<int> matrix;
+    MyContainer<int> matrix(1, 1);
+    matrix.fill(0);
 
     do {
         showMenu();
