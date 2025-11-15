@@ -175,9 +175,16 @@ void MyContainer<T>::fill(const T& value) {
 
 template<typename T>
 void MyContainer<T>::fillFromArray(const T* array, int size) {
+	if (!array || size <= 0) {
+		throw MyException("Invalid array or size");
+	}
+
 	int count = 0;
-	for (int i = 0; i < rows && count < size; ++i) {
-		for (int j = 0; j < cols && count < size; ++j) {
+	int totalElements = rows * cols;
+	int elementsToCopy = (size < totalElements) ? size : totalElements;
+
+	for (int i = 0; i < rows && count < elementsToCopy; ++i) {
+		for (int j = 0; j < cols && count < elementsToCopy; ++j) {
 			data[i][j] = array[count++];
 		}
 	}
@@ -217,29 +224,40 @@ void MyContainer<T>::resize(int newRows, int newCols) {
 	if (newRows <= 0 || newCols <= 0) {
 		throw MyException("Error.Size shouldn't be negative or zero");
 	}
+
 	T** newData = new T * [newRows];
-	for (int i = 0; i < newRows; i++) {
-		newData[i] = new T[newCols];
-		for (int j = 0; j < newCols; ++j) {
-			if (i < rows && j < cols) {
-				newData[i][j] = data[i][j];
+	try {
+		for (int i = 0; i < newRows; i++) {
+			newData[i] = new T[newCols]();
+
+			for (int j = 0; j < newCols; ++j) {
+				if (i < rows && j < cols) {
+					newData[i][j] = data[i][j];
+				}
 			}
 		}
-	}
-	for (size_t i = 0; i < rows; i++) {
-		delete[] data[i];
-	}
-	delete[] data;
-	data = nullptr;
 
-	data = newData;
-	rows = newRows;
-	cols = newCols;
+		for (int i = 0; i < rows; i++) {
+			delete[] data[i];
+		}
+		delete[] data;
+
+		data = newData;
+		rows = newRows;
+		cols = newCols;
+	}
+	catch (...) {
+		for (int i = 0; i < newRows; i++) {
+			delete[] newData[i];
+		}
+		delete[] newData;
+		throw;
+	}
 }
 
 template<typename T>
 MyContainer<T>::~MyContainer() {
-	for (size_t i = 0; i < rows; i++) {
+	for (int i = 0; i < rows; i++) {
 		delete[] data[i];
 	}
 	delete[] data;

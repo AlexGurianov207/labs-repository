@@ -14,6 +14,8 @@ void printMatrix(const MyContainer<T>& matrix) {
 
 template<typename T>
 void inputMatrix(MyContainer<T>& matrix) {
+    T* arr = nullptr;  // Инициализируем nullptr
+
     try {
         std::cout << "Enter the rows number of matrix: ";
         int newRows;
@@ -22,7 +24,7 @@ void inputMatrix(MyContainer<T>& matrix) {
         if (std::cin.fail() || newRows <= 0) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            throw MyException("Size should be just positive");
+            throw MyException("Rows should be positive number");
         }
 
         std::cout << "Enter the cols number of matrix: ";
@@ -32,30 +34,54 @@ void inputMatrix(MyContainer<T>& matrix) {
         if (std::cin.fail() || newCols <= 0) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            throw MyException("Size should be just positive");
+            throw MyException("Cols should be positive number");
         }
 
-        T* arr = new T[newCols * newRows];
-        std::cout << "Enter " << newRows * newCols << " elements of matrix:" << std::endl;
+        int totalElements = newRows * newCols;
+        arr = new T[totalElements];  // Выделяем память
 
-        for (int i = 0; i < newCols * newRows; i++) {
-            std::cout << "Element " << i + 1 << ": ";
+        std::cout << "Enter " << totalElements << " elements of matrix:" << std::endl;
+
+        for (int i = 0; i < totalElements; i++) {
+            std::cout << "Element " << (i + 1) << ": ";
             std::cin >> arr[i];
+
             if (std::cin.fail()) {
-                delete[] arr;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 throw MyException("Invalid input for matrix element");
             }
         }
 
+        // Создаем/изменяем матрицу и заполняем данными
         matrix.resize(newRows, newCols);
-        matrix.fillFromArray(arr, newCols * newRows);
+        matrix.fillFromArray(arr, totalElements);
 
+        // Освобождаем временный массив
         delete[] arr;
+        arr = nullptr;
 
         std::cout << "Matrix successfully created!" << std::endl;
     }
     catch (const MyException& ex) {
+        // Освобождаем память при исключении
+        if (arr != nullptr) {
+            delete[] arr;
+            arr = nullptr;
+        }
+
         std::cout << "Input error: " << ex.what() << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    catch (...) {
+        // Освобождаем память при любом исключении
+        if (arr != nullptr) {
+            delete[] arr;
+            arr = nullptr;
+        }
+
+        std::cout << "Unknown error during matrix input" << std::endl;
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
