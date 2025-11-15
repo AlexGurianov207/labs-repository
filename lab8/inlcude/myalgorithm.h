@@ -36,25 +36,41 @@ void MyAlgorithm<T>::swap(T& a, T& b) {
 
 template<typename T>
 void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
-	if (left >= right)return;
+    // днаюбхрэ опнбепйх цпюмхж
+    if (left < 0 || right < 0 || left >= right) return;
 
-	T pivot = array[(right + left) / 2];
+    // опнбепхрэ бюкхдмнярэ сйюгюрекъ
+    if (array == nullptr) return;
 
-	int i = left;
-	int j = right;
+    // опнбепхрэ хмдейя охбнрю
+    int pivotIndex = (right + left) / 2;
+    if (pivotIndex < left || pivotIndex > right) {
+        pivotIndex = left;  // хЯОНКЭГНБЮРЭ КЕБСЧ ЦПЮМХЖС ЙЮЙ ГЮОЮЯМНИ БЮПХЮМР
+    }
 
-	while (i <= j) {
-		while (array[i] < pivot)i++;
-		while (array[j] > pivot)j--;
+    T pivot = array[pivotIndex];
 
-		if (i <= j) {
-			swap(array[i], array[j]);
-			i++;
-			j--;
-		}
-	}
-	quickSort(array, left, j);
-	quickSort(array, i, right);
+    int i = left;
+    int j = right;
+
+    while (i <= j) {
+        // днаюбхрэ опнбепйх цпюмхж б жхйкюу
+        while (i <= right && array[i] < pivot) i++;
+        while (j >= left && array[j] > pivot) j--;
+
+        if (i <= j) {
+            // опнбепхрэ хмдейяш оепед налемнл
+            if (i >= left && i <= right && j >= left && j <= right) {
+                swap(array[i], array[j]);
+            }
+            i++;
+            j--;
+        }
+    }
+
+    // пейспяхъ я опнбепйни цпюмхж
+    if (left < j) quickSort(array, left, j);
+    if (i < right) quickSort(array, i, right);
 }
 
 template<typename T>

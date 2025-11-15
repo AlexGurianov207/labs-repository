@@ -124,15 +124,29 @@ void findElement(MyContainer<T>& matrix) {
 
 template<typename T>
 void sortMatrix(MyContainer<T>& matrix) {
-	std::cout << "Your matrix:" << std::endl;
+    try {
+        // ÏÐÎÂÅÐÈÒÜ ÏÓÑÒÓÞ ÌÀÒÐÈÖÓ
+        if (matrix.isEmpty()) {
+            std::cout << "Matrix is empty! Cannot sort." << std::endl;
+            return;
+        }
 
-	matrix.print();
+        // ÏÐÎÂÅÐÈÒÜ ÐÀÇÌÅÐ ÌÀÒÐÈÖÛ
+        if (matrix.getTotalSize() > 1000) {
+            std::cout << "Matrix is too large for sorting." << std::endl;
+            return;
+        }
 
-	MyAlgorithm<T>::sortContainer(matrix);
+        std::cout << "Your matrix:" << std::endl;
+        matrix.print();
 
-	std::cout << "Sorted matrix:" << std::endl;
+        MyAlgorithm<T>::sortContainer(matrix);
 
-	matrix.print();
-
+        std::cout << "Sorted matrix:" << std::endl;
+        matrix.print();
+    }
+    catch (const std::exception& e) {
+        std::cout << "Sorting error: " << e.what() << std::endl;
+    }
 }
 #endif

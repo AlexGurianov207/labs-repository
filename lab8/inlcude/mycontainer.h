@@ -48,15 +48,19 @@ MyContainer<T>::MyContainer():data(nullptr),rows(0),cols(0) {
 }
 
 template<typename T>
-MyContainer<T>::MyContainer(int newRows, int newCols):rows(newRows),cols(newCols) {
+MyContainer<T>::MyContainer(int newRows, int newCols) : rows(newRows), cols(newCols) {
 	if (newRows < 0 || newCols < 0) {
 		throw MyException("Error.Size shouldn't be negative");
 	}
-	data = new T*[rows];
+	if (newRows == 0 || newCols == 0) {
+		data = nullptr;
+		return;
+	}
+	data = new T * [rows];
 	for (int i = 0; i < rows; i++) {
 		data[i] = new T[cols];
 		for (int j = 0; j < cols; j++) {
-			data[i][j] = T();
+			data[i][j] = T();  // явна€ инициализаци€
 		}
 	}
 }
