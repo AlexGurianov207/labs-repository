@@ -120,16 +120,22 @@ MyContainer<T>& MyContainer<T>::operator=(MyContainer&& other)noexcept {
 
 template<typename T>
 T& MyContainer<T>::operator()(int row, int col) {
-	if (row >= rows || col >= cols || row < 0 || col < 0) {
-		throw MyException("Error in the transfer of the position");
+	if (row < 0 || row >= rows || col < 0 || col >= cols) {
+		throw MyException("Error: Position out of bounds");
+	}
+	if (data == nullptr || data[row] == nullptr) {
+		throw MyException("Error: Invalid data structure");
 	}
 	return data[row][col];
 }
 
 template<typename T>
 const T& MyContainer<T>::operator()(int row, int col)const {
-	if (row >= rows || col >= cols || row < 0 || col < 0) {
-		throw MyException("Error in the transfer of the position");
+	if (row < 0 || row >= rows || col < 0 || col >= cols) {
+		throw MyException("Error: Position out of bounds");
+	}
+	if (data == nullptr || data[row] == nullptr) {
+		throw MyException("Error: Invalid data structure");
 	}
 	return data[row][col];
 }
