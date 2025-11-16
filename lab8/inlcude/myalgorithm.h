@@ -3,6 +3,7 @@
 
 #include"myiterator.h"
 #include"mycontainer.h"
+#include<numeric>
 
 template<typename T>
 class MyAlgorithm {
@@ -48,7 +49,7 @@ void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
     if (left > right) return;
 
     // аегноюямши пюявер охбнрю я опнбепйни
-    int pivotIndex = left + (right - left) / 2;
+    int pivotIndex = std::midpoint(left, right);
 
     // цюпюмрхъ бюкхдмнярх хмдейяю охбнрю
     if (pivotIndex < left) pivotIndex = left;
@@ -93,7 +94,6 @@ template<typename T>
 void MyAlgorithm<T>::sortContainer(MyContainer<T>& data) {
     int totalSize = data.getTotalSize();
 
-    // ярпнцхе опнбепйх пюглепю
     if (totalSize <= 0) return;
     if (totalSize > 10000) {
         throw MyException("Container too large for sorting");
@@ -101,43 +101,58 @@ void MyAlgorithm<T>::sortContainer(MyContainer<T>& data) {
 
     T* temp = nullptr;
     try {
-        // бшдекемхе оюлърх я опнбепйни
         temp = new T[totalSize];
 
-        // ъбмюъ хмхжхюкхгюжхъ бяеу щкелемрнб
-        for (int i = 0; i < totalSize; i++) {
-            temp[i] = T(); // цЮПЮМРХПНБЮММЮЪ ХМХЖХЮКХГЮЖХЪ
-        }
-
-        // йнохпнбюмхе я опнбепйюлх цпюмхж
+        // петюйрнпхмц 1: йнохпнбюмхе дюммшу
         int index = 0;
-        for (auto it = data.begin(); it != data.end() && index < totalSize; ++it) {
-            if (index >= 0 && index < totalSize) {
+        MyIterator<T> it = data.begin();
+        const MyIterator<T> end = data.end();
+
+        // аегноюямши жхйк я ъбмшлх опнбепйюлх
+        while (it != end) {
+            // цюпюмрхъ бюкхдмнярх хмдейяю оепед гюохяэч
+            if (index >= totalSize) {
+                break; // гЮЫХРЮ НР БШУНДЮ ГЮ ЦПЮМХЖШ
+            }
+
+            // опнбепйю бюкхдмнярх хрепюрнпю оепед днярсонл
+            if (it.isValid()) {
                 temp[index] = *it;
             }
-            index++;
+            else {
+                temp[index] = T(); // гМЮВЕМХЕ ОН СЛНКВЮМХЧ ОПХ МЕБЮКХДМНЛ ХРЕПЮРНПЕ
+            }
+
+            ++index;
+            ++it;
         }
 
-        // опнбепйю оепед янпрхпнбйни
+        // днонкмхрекэмюъ опнбепйю: бяе кх дюммше яйнохпнбюмш
+        if (index != totalSize) {
+            throw MyException("Data copy incomplete during sorting");
+        }
+
         if (totalSize > 1 && temp != nullptr) {
             quickSort(temp, 0, totalSize - 1);
         }
 
-        // напюрмне йнохпнбюмхе я опнбепйюлх
+        // петюйрнпхмц 2: напюрмне йнохпнбюмхе
         index = 0;
-        for (auto it = data.begin(); it != data.end() && index < totalSize; ++it) {
-            if (index >= 0 && index < totalSize) {
+        it = data.begin();
+
+        while (it != end && index < totalSize) {
+            // опнбепйю бюкхдмнярх хрепюрнпю оепед гюохяэч
+            if (it.isValid()) {
                 *it = temp[index];
             }
-            index++;
+            ++index;
+            ++it;
         }
 
-        // нябнанфдемхе оюлърх
         delete[] temp;
         temp = nullptr;
     }
     catch (...) {
-        // цюпюмрхпнбюммне нябнанфдемхе оюлърх
         if (temp != nullptr) {
             delete[] temp;
             temp = nullptr;
