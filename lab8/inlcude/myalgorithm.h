@@ -45,7 +45,8 @@ void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
 
     int pivotIndex = std::midpoint(left, right);
 
-    pivotIndex = (pivotIndex < left) ? left : ((pivotIndex > right) ? right : pivotIndex);
+    if (pivotIndex < left) pivotIndex = left;
+    if (pivotIndex > right) pivotIndex = right;
 
     if (!validateIndex(array, pivotIndex, right + 1)) return;
     T pivot = array[pivotIndex];
@@ -57,7 +58,11 @@ void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
         while (i <= right && validateIndex(array, i, right + 1) && array[i] < pivot) i++;
         while (j >= left && validateIndex(array, j, right + 1) && array[j] > pivot) j--;
 
-        if (i <= j && validateIndex(array, i, right + 1) && validateIndex(array, j, right + 1)) {
+        bool canSwap = (i <= j) &&
+            validateIndex(array, i, right + 1) &&
+            validateIndex(array, j, right + 1);
+
+        if (canSwap) {
             swap(array[i], array[j]);
             i++;
             j--;
