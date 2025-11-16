@@ -41,21 +41,13 @@ void MyAlgorithm<T>::swap(T& a, T& b) {
 
 template<typename T>
 void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
-    // цксанйхе опнбепйх дкъ SONARQUBE
-    if (array == nullptr) return;
-    if (left < 0 || right < 0 || left >= right) return;
+    if (array == nullptr || left < 0 || right < 0 || left >= right || left > right) return;
 
-    // днонкмхрекэмюъ опнбепйю дхюоюгнмю
-    if (left > right) return;
-
-    // аегноюямши пюявер охбнрю я опнбепйни
     int pivotIndex = std::midpoint(left, right);
 
-    // цюпюмрхъ бюкхдмнярх хмдейяю охбнрю
     if (pivotIndex < left) pivotIndex = left;
     if (pivotIndex > right) pivotIndex = right;
 
-    // опнбепйю оепед днярсонл й щкелемрс
     if (!validateIndex(array, pivotIndex, right + 1)) return;
     T pivot = array[pivotIndex];
 
@@ -63,7 +55,6 @@ void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
     int j = right;
 
     while (i <= j) {
-        // опнбепйх цпюмхж оепед йюфдшл днярсонл
         while (i <= right && validateIndex(array, i, right + 1) && array[i] < pivot) i++;
         while (j >= left && validateIndex(array, j, right + 1) && array[j] > pivot) j--;
 
@@ -73,15 +64,13 @@ void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
             j--;
         }
         else {
-            break; // гЮЫХРЮ НР ГЮЖХЙКХБЮМХЪ
+            break;
         }
 
-        // днонкмхрекэмюъ гюыхрю нр бшундю гю цпюмхжш
         if (i < left) i = left;
         if (j > right) j = right;
     }
 
-    // пейспяхъ я сяхкеммшлх опнбепйюлх
     if (left < j && j >= 0 && j <= right) {
         quickSort(array, left, j);
     }
