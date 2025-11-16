@@ -72,7 +72,6 @@ void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
         if (j > right) j = right;
     }
 
-    // назедхмемхе дбсу сякнбхи б ндмс ярпнйс
     if (left < j) quickSort(array, left, j);
     if (i < right) quickSort(array, i, right);
 }
@@ -82,39 +81,31 @@ void MyAlgorithm<T>::sortContainer(MyContainer<T>& data) {
     int totalSize = data.getTotalSize();
 
     if (totalSize <= 0) return;
-    if (totalSize > 10000) {
-        throw MyException("Container too large for sorting");
-    }
 
     T* temp = nullptr;
     try {
         temp = new T[totalSize];
 
-        // петюйрнпхмц 1: йнохпнбюмхе дюммшу
         int index = 0;
         MyIterator<T> it = data.begin();
         const MyIterator<T> end = data.end();
 
-        // аегноюямши жхйк я ъбмшлх опнбепйюлх
         while (it != end) {
-            // цюпюмрхъ бюкхдмнярх хмдейяю оепед гюохяэч
             if (index >= totalSize) {
-                break; // гЮЫХРЮ НР БШУНДЮ ГЮ ЦПЮМХЖШ
+                break;
             }
 
-            // опнбепйю бюкхдмнярх хрепюрнпю оепед днярсонл
             if (it.isValid()) {
                 temp[index] = *it;
             }
             else {
-                temp[index] = T(); // гМЮВЕМХЕ ОН СЛНКВЮМХЧ ОПХ МЕБЮКХДМНЛ ХРЕПЮРНПЕ
+                temp[index] = T();
             }
 
             ++index;
             ++it;
         }
 
-        // днонкмхрекэмюъ опнбепйю: бяе кх дюммше яйнохпнбюмш
         if (index != totalSize) {
             throw MyException("Data copy incomplete during sorting");
         }
@@ -123,12 +114,10 @@ void MyAlgorithm<T>::sortContainer(MyContainer<T>& data) {
             quickSort(temp, 0, totalSize - 1);
         }
 
-        // петюйрнпхмц 2: напюрмне йнохпнбюмхе
         index = 0;
         it = data.begin();
 
         while (it != end && index < totalSize) {
-            // опнбепйю бюкхдмнярх хрепюрнпю оепед гюохяэч
             if (it.isValid()) {
                 *it = temp[index];
             }
