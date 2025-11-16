@@ -41,12 +41,11 @@ void MyAlgorithm<T>::swap(T& a, T& b) {
 
 template<typename T>
 void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
-    if (array == nullptr || left < 0 || right < 0 || left >= right || left > right) return;
+    if (array == nullptr || left < 0 || right < 0 || left >= right) return;
 
     int pivotIndex = std::midpoint(left, right);
 
-    if (pivotIndex < left) pivotIndex = left;
-    if (pivotIndex > right) pivotIndex = right;
+    pivotIndex = (pivotIndex < left) ? left : ((pivotIndex > right) ? right : pivotIndex);
 
     if (!validateIndex(array, pivotIndex, right + 1)) return;
     T pivot = array[pivotIndex];
