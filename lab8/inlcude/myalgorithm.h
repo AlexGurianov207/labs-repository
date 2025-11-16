@@ -57,7 +57,6 @@ void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
         while (i <= right && validateIndex(array, i, right + 1) && array[i] < pivot) i++;
         while (j >= left && validateIndex(array, j, right + 1) && array[j] > pivot) j--;
 
-        // хяонкэгнбюмхе INIT-STATEMENT дкъ назъбкемхъ canSwap
         if (bool canSwap = (i <= j) &&
             validateIndex(array, i, right + 1) &&
             validateIndex(array, j, right + 1); canSwap) {
@@ -73,13 +72,9 @@ void MyAlgorithm<T>::quickSort(T* array, int left, int right) {
         if (j > right) j = right;
     }
 
-    if (left < j && j >= 0 && j <= right) {
-        quickSort(array, left, j);
-    }
-
-    if (i < right && i >= left && i <= right) {
-        quickSort(array, i, right);
-    }
+    // назедхмемхе дбсу сякнбхи б ндмс ярпнйс
+    if (left < j) quickSort(array, left, j);
+    if (i < right) quickSort(array, i, right);
 }
 
 template<typename T>
